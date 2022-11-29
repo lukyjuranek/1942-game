@@ -1,14 +1,13 @@
 from math import sin, cos
 from Classes.shot import Shot
 from random import randint
-
+import pyxel
 class Plane:
-    def __init__(self, x: float, y: float, health: int, speed: int, pyxel):
+    def __init__(self, x: float, y: float, health: int, speed: int):
         self.x = x
         self.y = y
         self.health = health
         self.speed = speed
-        self.pyxel = pyxel
 
     @property
     def angle(self):
@@ -38,7 +37,7 @@ class Plane:
             self.shoot()
 
     def draw(self):
-        self.pyxel.blt(self.x, self.y, 0, 0, 0, 16, 16)
+        pyxel.blt(self.x, self.y, 0, 0, 0, 16, 16)
 
     def shoot(self):
         # Creates an instance of the shot class

@@ -1,4 +1,3 @@
-from Classes.plane import Plane
-
-class Player(Plane):
+class Player():
     def __init__(self, x, y):
+        pass

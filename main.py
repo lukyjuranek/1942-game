@@ -38,8 +38,8 @@ enemies = []
 # bullets = []
 
 # Tests one enemy
-enemies.append(Plane(10, 10, 100, 1, 0, pyxel))
-player = Plane(WIDTH/2, HEIGHT - 40, 100, 0, 0, pyxel)
+enemies.append(Plane(10, 10, 100, 1, 0))
+player = Plane(WIDTH/2, HEIGHT - 40, 100, 0, 0)
 
 # Runs pyxel
 pyxel.init(WIDTH, HEIGHT, "Hello Pyxel")
