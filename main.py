@@ -18,7 +18,8 @@ def update():
 
 def draw():
     pyxel.cls(0)
-    # pyxel.text(WIDTH/2, HEIGHT/2, "1942", 7)
+    # Draws the text elements
+    board.drawText()
     # pyxel.blt(x:int, y:int, bank:int, u:int, v:int, w:int, h:int)
     # pyxel.blt(50, 50, 0, 0, 0, 16, 16)
 

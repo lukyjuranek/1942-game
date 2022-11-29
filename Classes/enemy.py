@@ -12,7 +12,6 @@ class Enemy:
         self.speed = speed
         self.width = 16
         self.height = 16
-        # self.shots = []
 
     @property
     def angle(self):
@@ -31,7 +30,6 @@ class Enemy:
         if randint(0, 20) == 1:
             self.angle += 45 * randint(-1, 1)
 
-        
         self.x += self.speed * cos(self.angle)
         self.y += self.speed * sin(self.angle)
 
