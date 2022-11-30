@@ -27,13 +27,14 @@ class Enemy:
         # Randomly changes the angle of the plane
         # if randint(0, 20) == 1:
         #     self.angle += pi * randint(-1, 1)
-
         self.x += self.speed * cos(self.angle)
         self.y += self.speed * sin(self.angle)
+        if randint(0, 50) == 1:
+            self.shoot()
 
     def draw(self):
         pyxel.blt(self.x, self.y, 0, 0, 0, self.width, self.height, 0)
 
-    # def shoot(self):
-    #     # Creates an instance of the shot class
-    #     self.shots.append(Shot(self.x, self.y, 100, 3, self.angle, self.pyxel))
+    def shoot(self):
+        # Creates an instance of the shot class
+        self.shots.append(Shot(self.x, self.y, 3, self.angle))

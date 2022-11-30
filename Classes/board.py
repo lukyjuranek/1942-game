@@ -17,9 +17,13 @@ class Board:
     def updateAll(self):
         # Updates the player position
         self.player.update()
-        # Updates the enemy positions
+
+        # Updates the enemy positions and their shots
         for enemy in self.enemies:
             enemy.update()
+            for shot in enemy.shots:
+                shot.update()
+
         # Updates the shots
         for shot in self.player.shots:
             shot.update()
@@ -35,9 +39,12 @@ class Board:
 
         # Draws the player
         self.player.draw()
-        # Draws the enemies
+        # Draws the enemies and their shots
         for enemy in self.enemies:
             enemy.draw()
+            for shot in enemy.shots:
+                shot.draw()
+                
         # Draws the shots
         for shot in self.player.shots:
             shot.draw()
