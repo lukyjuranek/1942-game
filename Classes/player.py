@@ -36,5 +36,5 @@ class Player():
     
     def shoot(self):
         # Creates an instance of the shot class
-        self.shots.append(Shot(self.x, self.y, 100, 3, 3*pi/2))
-        self.shots.append(Shot(self.x + self.width, self.y, 100, 3, 3*pi/2))
+        self.shots.append(Shot(self.x, self.y, 3, 3*pi/2))
+        self.shots.append(Shot(self.x + self.width, self.y, 3, 3*pi/2))

@@ -2,10 +2,9 @@ import pyxel
 from math import sin, cos
 
 class Shot:
-    def __init__(self, x: float, y: float, health: int, speed: int, angle):
+    def __init__(self, x: float, y: float, speed: int, angle: float):
         self.x = x
         self.y = y
-        self.health = health
         self.speed = speed
         self.angle = angle
         self.width = 4
@@ -16,4 +15,4 @@ class Shot:
         self.y += self.speed * sin(self.angle)
 
     def draw(self):
-        pyxel.blt(self.x, self.y, 0, 0, 16, self.width, 16 + self.height, 0)
+        pyxel.blt(self.x, self.y, 0, 0, 16, self.width, self.height, 0)
