@@ -22,17 +22,8 @@ def update():
 
 def draw():
     pyxel.cls(6)
-    # Draws the text elements
-    board.drawText()
-
-    # Draws the player
-    board.player.draw()
-    # Draws the enemies
-    for enemy in board.enemies:
-        enemy.draw()
-    # Draws the shots
-    for shot in board.player.shots:
-        shot.draw()
+    # Draws all the elements in the game
+    board.drawEverything()
 
 
 board = Board()

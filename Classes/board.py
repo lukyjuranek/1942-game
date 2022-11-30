@@ -18,6 +18,20 @@ class Board:
         pyxel.text(0, 0, str(self.player.score), 7)
         pyxel.text(self.width/2, 0, "1942", 7)
 
+    def drawEverything(self):
+        '''Draws all the elements in the game'''
+        # Draws the text elements
+        self.drawText()
+
+        # Draws the player
+        self.player.draw()
+        # Draws the enemies
+        for enemy in self.enemies:
+            enemy.draw()
+        # Draws the shots
+        for shot in self.player.shots:
+            shot.draw()
+
     def checkAllCollisions(self):
         '''Checks all the collisions in the game and does the according actions'''
         # Checks if any enemy has collided with the player
