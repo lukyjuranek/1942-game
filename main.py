@@ -3,6 +3,8 @@ import pyxel
 from Classes.enemy import Enemy
 # from Classes.player import Player
 from Classes.board import Board
+from Classes.collisionChecker import CollisionChecker
+from math import pi
 
 
 def update():
@@ -14,13 +16,14 @@ def update():
     # Updates the shots
     for shot in board.player.shots:
         shot.update()
+    
+    board.checkAllCollisions()
 
 
 def draw():
-    pyxel.cls(0)
-    # pyxel.text(WIDTH/2, HEIGHT/2, "1942", 7)
-    # pyxel.blt(x:int, y:int, bank:int, u:int, v:int, w:int, h:int)
-    # pyxel.blt(50, 50, 0, 0, 0, 16, 16)
+    pyxel.cls(6)
+    # Draws the text elements
+    board.drawText()
 
     # Draws the player
     board.player.draw()
@@ -32,17 +35,13 @@ def draw():
         shot.draw()
 
 
-    # Draws the bullet to test it
-    pyxel.blt(20, 20, 0, 0, 16, 4, 19)
-
-
 board = Board()
-# Tests one enemy
-board.enemies.append(Enemy(10, 10, 100, 1, 0))
-# player = Player(WIDTH/2, HEIGHT - 40, 100, 0, 0)
+# collisionChecker = CollisionChecker()
+# Testing enemies
+board.enemies.append(Enemy(20, 10, pi/2, 1, 1))
+board.enemies.append(Enemy(100, 30, pi/2, 1, 1))
 
-
-# Runs pyxel
-pyxel.init(board.width, board.height, "Hello Pyxel")
+# Initializes and runs pyxel and loads the resources
+pyxel.init(board.width, board.height, "1942")
 pyxel.load("pyxel_resource_file.pyxres")
 pyxel.run(update, draw)
