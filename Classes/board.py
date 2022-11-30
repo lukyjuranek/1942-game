@@ -14,11 +14,21 @@ class Board:
         self.enemies = []
         self.enemyShots = []
 
+    def updateAll(self):
+        # Updates the player position
+        self.player.update()
+        # Updates the enemy positions
+        for enemy in self.enemies:
+            enemy.update()
+        # Updates the shots
+        for shot in self.player.shots:
+            shot.update()
+
     def drawText(self):
         pyxel.text(0, 0, str(self.player.score), 7)
         pyxel.text(self.width/2, 0, "1942", 7)
 
-    def drawEverything(self):
+    def drawAll(self):
         '''Draws all the elements in the game'''
         # Draws the text elements
         self.drawText()

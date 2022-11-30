@@ -8,22 +8,14 @@ from math import pi
 
 
 def update():
-    # Updates the player position
-    board.player.update()
-    # Updates the enemy positions
-    for enemy in board.enemies:
-        enemy.update()
-    # Updates the shots
-    for shot in board.player.shots:
-        shot.update()
-    
+    board.updateAll()
     board.checkAllCollisions()
 
 
 def draw():
     pyxel.cls(6)
     # Draws all the elements in the game
-    board.drawEverything()
+    board.drawAll()
 
 
 board = Board()
