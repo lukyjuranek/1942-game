@@ -16,4 +16,4 @@ class Shot:
         self.y += self.speed * sin(self.angle)
 
     def draw(self):
-        pyxel.blt(self.x, self.y, 0, 0, 16, 4, 15+self.height, 0)
+        pyxel.blt(self.x, self.y, 0, 0, 16, self.width, 16 + self.height, 0)
