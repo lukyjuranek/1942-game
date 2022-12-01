@@ -67,6 +67,12 @@ class Enemy:
         if randint(0, 50) == 1:
             self.shoot()
 
+        # Remove the shots that go off the screen
+        for shot in self.shots:
+            # Destroys the shot if it goes out of the screen
+            if shot.x - shot.width < 0 or shot.x > pyxel.width or shot.y - shot.height < 0 or shot.y > pyxel.height:
+                self.shots.remove(shot)
+
     def draw(self):
         """Draws the enemy"""
 

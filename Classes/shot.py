@@ -16,6 +16,7 @@ class Shot:
         self.x += self.speed * cos(radians(self.angle)) * FrameRate.delta_time
         self.y += self.speed * sin(radians(self.angle)) * FrameRate.delta_time
 
+
     def draw(self):
         '''Draws the shot'''
         pyxel.blt(self.x, self.y, 0, 0, 16, self.width, self.height, 0)
