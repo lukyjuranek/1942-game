@@ -59,7 +59,7 @@ class Enemy:
 
         # Destroys the plane if it goes out of the screen by more than 30 pixels
         # TODO: Make this a constant and review the value
-        if self.x < -30 or self.x > pyxel.width + 30 or self.y < -30 or self.y > pyxel.height + 30:
+        if self.x - self.width < -30 or self.x > pyxel.width + 30 or self.y - self.height < -30 or self.y > pyxel.height + 30:
             self.health = 0
 
         self.x += self.speed * cos(radians(self.angle)) * FrameRate.delta_time
