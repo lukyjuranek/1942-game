@@ -8,7 +8,7 @@ class Player():
         self.x = x
         self.y = y
         self.width = 16
-        self.height = 16
+        self.height = 14
         self.speed = 2
         self.lives = 3
         self.score = 0
@@ -33,7 +33,7 @@ class Player():
 
     def draw(self):
         '''Draws the player'''
-        pyxel.blt(self.x, self.y, 0, 0, 0, self.width, self.height, 0)
+        pyxel.blt(self.x, self.y, 0, 0, 2, self.width, self.height, 0)
 
     
     def shoot(self):
