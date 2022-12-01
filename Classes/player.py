@@ -1,8 +1,9 @@
 from Classes.shot import Shot
-from Classes.frameRate import FrameRate
+import main
 from math import pi
 import pyxel
-
+import main
+main.
 
 class Player:
     """Player class"""
@@ -52,16 +53,16 @@ class Player:
     def update(self):
         """Updates the player position and shoots if the appropriate key is pressed"""
         if pyxel.btn(pyxel.KEY_LEFT) and self.x > 0:
-            self.x -= self.speed * FrameRate.delta_time
+            self.x -= self.speed * main.DELTA_TIME
 
         if pyxel.btn(pyxel.KEY_RIGHT) and self.x < pyxel.width - self.width:
-            self.x += self.speed * FrameRate.delta_time
+            self.x += self.speed * main.DELTA_TIME
 
         if pyxel.btn(pyxel.KEY_UP) and self.y > 0:
-            self.y -= self.speed * FrameRate.delta_time
+            self.y -= self.speed * main.DELTA_TIME
         
         if pyxel.btn(pyxel.KEY_DOWN) and self.y < pyxel.height - self.height:
-            self.y += self.speed * FrameRate.delta_time
+            self.y += self.speed * main.DELTA_TIME
 
         if pyxel.btnp(pyxel.KEY_SPACE):
             self.shoot()

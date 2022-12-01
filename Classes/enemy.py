@@ -1,5 +1,5 @@
 from Classes.shot import Shot
-from Classes.frameRate import FrameRate
+import main
 from random import randint
 from math import sin, cos, pi, radians
 import pyxel
@@ -62,8 +62,8 @@ class Enemy:
         if self.x - self.width < -30 or self.x > pyxel.width + 30 or self.y - self.height < -30 or self.y > pyxel.height + 30:
             self.health = 0
 
-        self.x += self.speed * cos(radians(self.angle)) * FrameRate.delta_time
-        self.y += self.speed * sin(radians(self.angle)) * FrameRate.delta_time
+        self.x += self.speed * cos(radians(self.angle)) * main.DELTA_TIME
+        self.y += self.speed * sin(radians(self.angle)) * main.DELTA_TIME
         if randint(0, 50) == 1:
             self.shoot()
 

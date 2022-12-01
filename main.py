@@ -1,6 +1,5 @@
 import pyxel
 # from random import randint
-from Classes.frameRate import FrameRate
 # from Classes.player import Player
 from Classes.board import Board
 from Classes.enemy import Enemy
@@ -24,6 +23,9 @@ def draw():
     # Draws all the elements in the game
     board.draw_all()
 
+# Constants
+FRAME_RATE = 60
+DELTA_TIME = 1 / FRAME_RATE
 
 # Initializes the board object
 board = Board()

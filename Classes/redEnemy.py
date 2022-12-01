@@ -1,5 +1,5 @@
 from Classes.enemy import Enemy
-from Classes.frameRate import FrameRate
+import main
 import pyxel
 from math import pi
 
