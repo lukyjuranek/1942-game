@@ -1,5 +1,5 @@
 import pyxel
-from math import sin, cos
+from math import sin, cos, radians
 
 class Shot:
     def __init__(self, x: float, y: float, speed: int, angle: float):
@@ -12,8 +12,8 @@ class Shot:
 
     def update(self):
         '''Updates the shot position'''
-        self.x += self.speed * cos(self.angle)
-        self.y += self.speed * sin(self.angle)
+        self.x += self.speed * cos(radians(self.angle))
+        self.y += self.speed * sin(radians(self.angle))
 
     def draw(self):
         '''Draws the shot'''

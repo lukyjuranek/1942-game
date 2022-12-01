@@ -1,6 +1,6 @@
 from Classes.shot import Shot
 from random import randint
-from math import sin, cos, pi
+from math import sin, cos, pi, radians
 import pyxel
 
 class Enemy:
@@ -59,17 +59,17 @@ class Enemy:
         if self.x < -30 or self.x > pyxel.width + 30 or self.y < -30 or self.y > pyxel.height + 30:
             self.health = 0
 
-        self.x += self.speed * cos(self.angle)
-        self.y += self.speed * sin(self.angle)
+        self.x += self.speed * cos(radians(self.angle))
+        self.y += self.speed * sin(radians(self.angle))
         if randint(0, 50) == 1:
             self.shoot()
 
     def draw(self):
         '''Draws the enemy'''
 
-        if self.angle == pi/2:
+        if self.angle == 90:
             pyxel.blt(self.x, self.y, 0, 3, 28, self.width, self.height, 0)
-        elif self.angle == 3*pi/2:
+        elif self.angle == 270:
             pass
         else:
             raise Exception("The angle of the enemy is not supported")

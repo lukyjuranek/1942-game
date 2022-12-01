@@ -25,9 +25,9 @@ class RegularEnemy(Enemy):
 
     def draw(self):
         '''Draws the enemy'''
-        if self.angle == 3*pi/2:
+        if self.angle == 270:
             pyxel.blt(self.x, self.y, 0, 3, 28, self.width, self.height, 0)
-        elif self.angle == pi/2:
+        elif self.angle == 90:
             pyxel.blt(self.x, self.y, 0, 3, 43, self.width, self.height, 0)
         else:
             raise Exception("The angle of the enemy is not supported")

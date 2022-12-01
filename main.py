@@ -26,10 +26,12 @@ def draw():
 
 board = Board()
 # Testing enemies
-board.enemies.append(RegularEnemy(20, 50, pi/2))
-board.enemies.append(RegularEnemy(100, 50, 3*pi/2))
-board.enemies.append(RedEnemy(40, 10, pi/2))
-board.enemies.append(RedEnemy(120, 30, 3*pi/2))
+board.enemies.append(RegularEnemy(20, 50, 90))
+board.enemies.append(RegularEnemy(100, 50, 270))
+board.enemies.append(RedEnemy(40, 10, 90))
+board.enemies.append(RedEnemy(120, 30, 270))
+board.enemies.append(RedEnemy(40, 10, 0))
+board.enemies.append(RedEnemy(120, 30, 180))
 
 # Initializes and runs pyxel and loads the resources
 pyxel.init(board.width, board.height, "1942")  # type: ignore
