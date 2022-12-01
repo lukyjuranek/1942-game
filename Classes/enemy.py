@@ -4,6 +4,7 @@ from math import sin, cos, pi
 import pyxel
 
 class Enemy:
+    '''Enemy class'''
     def __init__(self, x: float, y: float, angle: float, health: int, speed: int):
         self.x = x
         self.y = y
@@ -24,6 +25,7 @@ class Enemy:
         self.__angle = value
 
     def update(self):
+        '''Updates the enemy position and shoots'''
         # Randomly changes the angle of the plane
         # if randint(0, 20) == 1:
         #     self.angle += pi * randint(-1, 1)
@@ -39,6 +41,7 @@ class Enemy:
             self.shoot()
 
     def draw(self):
+        '''Draws the enemy'''
         if self.angle == pi/2:
             pyxel.blt(self.x, self.y, 0, 3, 28, self.width, self.height, 0)
         elif self.angle == 3*pi/2:
@@ -48,5 +51,6 @@ class Enemy:
             
 
     def shoot(self):
+        '''Shoots from the enemy(Creates an instance of the shot class)'''
         # Creates an instance of the shot class
         self.shots.append(Shot(self.x, self.y, 3, self.angle))

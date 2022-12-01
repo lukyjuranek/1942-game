@@ -1,4 +1,6 @@
 class CollisionChecker:
+    '''Class that checks the collisions in the game'''
+    
     @classmethod # This is a class method meaning that it can be called without creating an instance of the class
     def checkCollision(cls, ob1, ob2):
         '''Checks if the ob1(object1) and ob2(object2) are overlapping'''

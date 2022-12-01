@@ -15,6 +15,7 @@ class Board:
         self.enemyShots = []
 
     def updateAll(self):
+        '''Updates all the elements in the game and does the according actions(like removing enemies)'''
         # Updates the player position
         self.player.update()
 
@@ -32,6 +33,7 @@ class Board:
             shot.update()
 
     def drawText(self):
+        '''Draws the text elements in the game'''
         pyxel.text(0, 0, str(self.player.score), 7)
         pyxel.text(self.width/2, 0, "1942", 7)
 
