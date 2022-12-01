@@ -10,8 +10,8 @@ class Enemy:
         self.angle = angle
         self.health = health
         self.speed = speed
-        self.width = 16
-        self.height = 16
+        self.width = 10
+        self.height = 9
         self.gainedScore = 100 # TODO: Change this varibale name
         self.shots = []
 
@@ -39,7 +39,13 @@ class Enemy:
             self.shoot()
 
     def draw(self):
-        pyxel.blt(self.x, self.y, 0, 0, 0, self.width, self.height, 0)
+        if self.angle == pi/2:
+            pyxel.blt(self.x, self.y, 0, 3, 28, self.width, self.height, 0)
+        elif self.angle == 3*pi/2:
+            pass
+        else:
+            raise Exception("The angle of the enemy is not supported")
+            
 
     def shoot(self):
         # Creates an instance of the shot class
