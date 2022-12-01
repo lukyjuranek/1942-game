@@ -4,7 +4,7 @@ from math import sin, cos, pi
 import pyxel
 
 class Enemy:
-    def __init__(self, x: float, y: float, angle: int, health: int, speed: int):
+    def __init__(self, x: float, y: float, angle: float, health: int, speed: int):
         self.x = x
         self.y = y
         self.angle = angle
