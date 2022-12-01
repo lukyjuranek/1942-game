@@ -1,4 +1,5 @@
 from Classes.shot import Shot
+from Classes.frameRate import FrameRate
 from math import pi
 import pyxel
 
@@ -9,7 +10,7 @@ class Player():
         self.y = y
         self.width = 16
         self.height = 14
-        self.speed = 2
+        self.speed = 120
         self.lives = 3
         self.score = 0
         self.shots = []
@@ -50,16 +51,16 @@ class Player():
     def update(self):
         '''Updates the player position and shoots if the appropriate key is pressed'''
         if pyxel.btn(pyxel.KEY_LEFT) and self.x > 0:
-            self.x -= self.speed
+            self.x -= self.speed * FrameRate.delta_time
 
         if pyxel.btn(pyxel.KEY_RIGHT) and self.x < pyxel.width - self.width:
-            self.x += self.speed
+            self.x += self.speed * FrameRate.delta_time
 
         if pyxel.btn(pyxel.KEY_UP) and self.y > 0:
-            self.y -= self.speed
+            self.y -= self.speed * FrameRate.delta_time
         
         if pyxel.btn(pyxel.KEY_DOWN) and self.y < pyxel.height - self.height:
-            self.y += self.speed
+            self.y += self.speed * FrameRate.delta_time
 
         if pyxel.btnp(pyxel.KEY_SPACE):
             self.shoot()
@@ -72,5 +73,5 @@ class Player():
     def shoot(self):
         '''Shoots from the player(Creates an instance of the shot class)'''
         # Creates an instance of the shot class
-        self.shots.append(Shot(self.x, self.y, 3, 3*pi/2))
-        self.shots.append(Shot(self.x + self.width, self.y, 3, 3*pi/2))
+        self.shots.append(Shot(self.x, self.y, 180, 270))
+        self.shots.append(Shot(self.x + self.width, self.y, 180, 270))

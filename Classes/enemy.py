@@ -1,6 +1,7 @@
 from Classes.shot import Shot
+from Classes.frameRate import FrameRate
 from random import randint
-from math import sin, cos, pi
+from math import sin, cos, pi, radians
 import pyxel
 
 class Enemy:
@@ -9,11 +10,11 @@ class Enemy:
         self.x = x
         self.y = y
         self.angle = angle
-        self.speed = 1
+        self.speed = 60
         self.width = 10
         self.height = 9
         self.health = 1
-        self.gainedScore = 100 # TODO: Change this varibale name
+        self.gainedScore = 100 # TODO: Change this variable name
         self.shots = []
 
     @property
@@ -22,7 +23,7 @@ class Enemy:
 
     @angle.setter
     def angle(self, value):
-        if type(value) != float:
+        if type(value) != float and type(value) != int:
             raise TypeError("The angle must be a float")
         else:
             self.__angle = value
@@ -59,17 +60,17 @@ class Enemy:
         if self.x < -30 or self.x > pyxel.width + 30 or self.y < -30 or self.y > pyxel.height + 30:
             self.health = 0
 
-        self.x += self.speed * cos(self.angle)
-        self.y += self.speed * sin(self.angle)
+        self.x += self.speed * cos(radians(self.angle)) * FrameRate.delta_time
+        self.y += self.speed * sin(radians(self.angle)) * FrameRate.delta_time
         if randint(0, 50) == 1:
             self.shoot()
 
     def draw(self):
         '''Draws the enemy'''
 
-        if self.angle == pi/2:
+        if self.angle == 90:
             pyxel.blt(self.x, self.y, 0, 3, 28, self.width, self.height, 0)
-        elif self.angle == 3*pi/2:
+        elif self.angle == 270:
             pass
         else:
             raise Exception("The angle of the enemy is not supported")
@@ -78,4 +79,4 @@ class Enemy:
     def shoot(self):
         '''Shoots from the enemy(Creates an instance of the shot class)'''
         # Creates an instance of the shot class
-        self.shots.append(Shot(self.x, self.y, 3, self.angle))
+        self.shots.append(Shot(self.x, self.y, 100, self.angle))
