@@ -5,15 +5,14 @@ import pyxel
 
 class Enemy:
     '''Enemy class'''
-    def __init__(self, x: float, y: float, angle: float, health: int, speed: int):
+    def __init__(self, x: float, y: float, angle: float):
         self.x = x
         self.y = y
         self.angle = angle
-        self.health = health
-        self.speed = speed
+        self.speed = 1
         self.width = 10
         self.height = 9
-        self.gainedScore = 100 # TODO: Change this varibale name
+        #self.gainedScore = 100 # TODO: Change this varibale name
         self.shots = []
 
     @property
@@ -22,8 +21,32 @@ class Enemy:
 
     @angle.setter
     def angle(self, value):
-        self.__angle = value
+        if type(value) != float:
+            raise TypeError("The angle must be a float")
+        else:
+            self.angle = value
 
+    @property
+    def x(self):
+        return self.__x
+
+    @x.setter
+    def x(self, val):
+        if type(val) != float or type(val) != int:
+            raise TypeError("The coordinate must be an integer")
+        else:
+            self.__x = val
+
+    @property
+    def y(self):
+        return self.__y
+
+    @y.setter
+    def y(self, val):
+        if type(val) != float or type(val) != int:
+            raise TypeError("The coordinate must be an integer")
+        else:
+            self.__y = val
     def update(self):
         '''Updates the enemy position and shoots'''
         # Randomly changes the angle of the plane
@@ -42,6 +65,7 @@ class Enemy:
 
     def draw(self):
         '''Draws the enemy'''
+
         if self.angle == pi/2:
             pyxel.blt(self.x, self.y, 0, 3, 28, self.width, self.height, 0)
         elif self.angle == 3*pi/2:
