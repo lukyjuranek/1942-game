@@ -10,7 +10,7 @@ class Board:
     def __init__(self):
         self.width = 200
         self.height = 200
-        self.player = Player(self.width/2, self.height - 40, 2)
+        self.player = Player(self.width/2, self.height - 40)
         self.enemies = []
         self.enemyShots = []
 

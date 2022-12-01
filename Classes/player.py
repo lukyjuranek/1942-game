@@ -4,12 +4,12 @@ import pyxel
 
 class Player():
     '''Player class'''
-    def __init__(self, x, y, speed):
+    def __init__(self, x, y):
         self.x = x
         self.y = y
         self.width = 16
         self.height = 16
-        self.speed = speed
+        self.speed = 2
         self.lives = 3
         self.score = 0
         self.shots = []
