@@ -14,6 +14,39 @@ class Player():
         self.score = 0
         self.shots = []
 
+    @property
+    def x(self):
+        return self.__x
+
+    @x.setter
+    def x(self, value):
+        if type(value) != int and type(value) != float:
+            raise TypeError("The value must be an integer")
+        else:
+            self.__x = value
+
+    @property
+    def y(self):
+        return self.__y
+
+    @y.setter
+    def y(self, value):
+        if type(value) != int and type(value) != float:
+            raise TypeError("The value must be an integer")
+        else:
+            self.__y = value
+
+    @property
+    def lives(self):
+        return self.__lives
+
+    @lives.setter
+    def lives(self, value):
+        if type(value) != int:
+            raise TypeError("The number of lives must me an integer")
+        else:
+            self.__lives = value
+
     def update(self):
         '''Updates the player position and shoots if the appropriate key is pressed'''
         if pyxel.btn(pyxel.KEY_LEFT) and self.x > 0:
