@@ -1,6 +1,5 @@
 from Classes.player import Player
 from Classes.enemy import Enemy
-from Classes.collisionChecker import CollisionChecker
 import pyxel
 
 
@@ -54,18 +53,25 @@ class Board:
         for shot in self.player.shots:
             shot.draw()
 
+    def check_collision(self, ob1, ob2):
+        """Checks if the ob1(object1) and ob2(object2) are overlapping"""
+        if ob1.x < ob2.x + ob2.width and ob1.x + ob1.width > ob2.x and ob1.y < ob2.y + ob2.height and ob1.height + ob1.y > ob2.y:
+            return True
+        else:
+            return False
+
     def check_all_collisions(self):
         """Checks all the collisions in the game and does the according actions"""
         # Checks if any enemy has collided with the player
         for enemy in self.enemies:
-            if CollisionChecker.check_collision(self.player, enemy):
+            if self.check_collision(self.player, enemy):
                 print("Player has collided with an enemy")
                 # TODO: Reset game and remove a life
 
         # Checks if the player has shot an enemy
         for enemy in self.enemies:
             for shot in self.player.shots:
-                if CollisionChecker.check_collision(shot, enemy):
+                if self.check_collision(shot, enemy):
                     print("An enemy has been hit by the player")
                     # Adds the score to the player
                     self.player.score += enemy.gained_score
@@ -74,7 +80,7 @@ class Board:
         # Checks if any enemy has shot the player
         for enemy in self.enemies:
             for shot in enemy.shots:
-                if CollisionChecker.check_collision(shot, self.player):
+                if self.check_collision(shot, self.player):
                     print("Player has been shots ny an enemy")
 
         # TODO: Remove this code

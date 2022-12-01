@@ -1,5 +1,5 @@
 from Classes.enemy import Enemy
-import main
+import constants
 import pyxel
 from math import pi
 

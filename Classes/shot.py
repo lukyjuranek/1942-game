@@ -1,5 +1,5 @@
 import pyxel
-import main
+import constants
 from math import sin, cos, radians
 
 class Shot:
@@ -13,8 +13,8 @@ class Shot:
 
     def update(self):
         '''Updates the shot position'''
-        self.x += self.speed * cos(radians(self.angle)) * main.DELTA_TIME
-        self.y += self.speed * sin(radians(self.angle)) * main.DELTA_TIME
+        self.x += self.speed * cos(radians(self.angle)) * constants.DELTA_TIME
+        self.y += self.speed * sin(radians(self.angle)) * constants.DELTA_TIME
 
 
     def draw(self):

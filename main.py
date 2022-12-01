@@ -8,6 +8,7 @@ from Classes.regularEnemy import RegularEnemy
 from Classes.bombardier import Bombardier
 from Classes.superBomardier import SuperBombardier
 # from Classes.collisionChecker import CollisionChecker
+import constants
 from math import pi
 
 
@@ -23,10 +24,6 @@ def draw():
     # Draws all the elements in the game
     board.draw_all()
 
-# Constants
-FRAME_RATE = 60
-DELTA_TIME = 1 / FRAME_RATE
-
 # Initializes the board object
 board = Board()
 
@@ -39,6 +36,6 @@ board.enemies.append(RedEnemy(40, 10, 0))
 board.enemies.append(RedEnemy(120, 30, 180))
 
 # Initializes and runs pyxel and loads the resources
-pyxel.init(board.width, board.height, "1942", fps=FrameRate.frame_rate)  # type: ignore
+pyxel.init(board.width, board.height, "1942", fps=constants.FRAME_RATE)  # type: ignore
 pyxel.load("pyxel_resource_file.pyxres")
 pyxel.run(update, draw)
