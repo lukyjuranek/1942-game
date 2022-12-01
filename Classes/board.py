@@ -3,20 +3,19 @@ from Classes.enemy import Enemy
 from Classes.collisionChecker import CollisionChecker
 import pyxel
 
+
 class Board:
-    '''
-    Class that stores the board, the elements and some global variables of the game
-    '''
+    """Class that stores the board, the elements and some global variables of the game"""
     def __init__(self):
         self.width = 200
         self.height = 200
         self.player = Player(self.width/2, self.height - 40)
         self.enemies = []
-        self.enemyShots = []
+        self.enemy_shots = []
         self.frameRate = 60
 
-    def updateAll(self):
-        '''Updates all the elements in the game and does the according actions(like removing enemies)'''
+    def update_all(self):
+        """Updates all the elements in the game and does the according actions(like removing enemies)"""
         # Updates the player position
         self.player.update()
 
@@ -33,15 +32,15 @@ class Board:
         for shot in self.player.shots:
             shot.update()
 
-    def drawText(self):
-        '''Draws the text elements in the game'''
+    def draw_text(self):
+        """Draws the text elements in the game"""
         pyxel.text(0, 0, str(self.player.score), 7)
         pyxel.text(self.width/2, 0, "1942", 7)
 
-    def drawAll(self):
-        '''Draws all the elements in the game'''
+    def draw_all(self):
+        """Draws all the elements in the game"""
         # Draws the text elements
-        self.drawText()
+        self.draw_text()
 
         # Draws the player
         self.player.draw()
@@ -55,27 +54,27 @@ class Board:
         for shot in self.player.shots:
             shot.draw()
 
-    def checkAllCollisions(self):
-        '''Checks all the collisions in the game and does the according actions'''
+    def check_all_collisions(self):
+        """Checks all the collisions in the game and does the according actions"""
         # Checks if any enemy has collided with the player
         for enemy in self.enemies:
-            if CollisionChecker.checkCollision(self.player, enemy):
+            if CollisionChecker.check_collision(self.player, enemy):
                 print("Player has collided with an enemy")
                 # TODO: Reset game and remove a life
 
         # Checks if the player has shot an enemy
         for enemy in self.enemies:
             for shot in self.player.shots:
-                if CollisionChecker.checkCollision(shot, enemy):
+                if CollisionChecker.check_collision(shot, enemy):
                     print("An enemy has been hit by the player")
                     # Adds the score to the player
-                    self.player.score += enemy.gainedScore
+                    self.player.score += enemy.gained_score
                     self.enemies.remove(enemy)
 
         # Checks if any enemy has shot the player
         for enemy in self.enemies:
             for shot in enemy.shots:
-                if CollisionChecker.checkCollision(shot, self.player):
+                if CollisionChecker.check_collision(shot, self.player):
                     print("Player has been shots ny an enemy")
 
         # TODO: Remove this code

@@ -3,13 +3,14 @@ from Classes.frameRate import FrameRate
 import pyxel
 from math import pi
 
+
 class RedEnemy(Enemy):
     def __init__(self, x, y, angle):
         super().__init__(x, y, angle)
         self.speed = 80
         self.width = 10
         self.height = 10
-        self.gainedScore = 100
+        self.gained_score = 100
         self.health = 2
         self.shots = []
 
@@ -25,7 +26,7 @@ class RedEnemy(Enemy):
             self.__health = value
 
     def draw(self):
-        '''Draws the enemy'''
+        """Draws the enemy"""
 
         if self.angle == 270:
             # UP

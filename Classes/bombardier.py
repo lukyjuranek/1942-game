@@ -7,7 +7,7 @@ class Bombardier(Enemy):
         self.speed = 1
         self.width = 10
         self.height = 9
-        self.gainedScore = 150
+        self.gained_score = 150
         self.health = 3
         self.shots = []
 

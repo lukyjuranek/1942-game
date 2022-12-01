@@ -7,7 +7,7 @@ class SuperBombardier(Enemy):
         self.speed = 1
         self.width = 10
         self.height = 9
-        self.gainedScore = 200
+        self.gained_score = 200
         self.health = 4
         self.shots = []
 

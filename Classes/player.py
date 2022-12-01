@@ -3,8 +3,9 @@ from Classes.frameRate import FrameRate
 from math import pi
 import pyxel
 
-class Player():
-    '''Player class'''
+
+class Player:
+    """Player class"""
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -49,7 +50,7 @@ class Player():
             self.__lives = value
 
     def update(self):
-        '''Updates the player position and shoots if the appropriate key is pressed'''
+        """Updates the player position and shoots if the appropriate key is pressed"""
         if pyxel.btn(pyxel.KEY_LEFT) and self.x > 0:
             self.x -= self.speed * FrameRate.delta_time
 
@@ -66,12 +67,11 @@ class Player():
             self.shoot()
 
     def draw(self):
-        '''Draws the player'''
+        """Draws the player"""
         pyxel.blt(self.x, self.y, 0, 0, 2, self.width, self.height, 0)
 
-    
     def shoot(self):
-        '''Shoots from the player(Creates an instance of the shot class)'''
+        """Shoots from the player(Creates an instance of the shot class)"""
         # Creates an instance of the shot class
         self.shots.append(Shot(self.x, self.y, 180, 270))
         self.shots.append(Shot(self.x + self.width, self.y, 180, 270))

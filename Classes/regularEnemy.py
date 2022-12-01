@@ -9,7 +9,7 @@ class RegularEnemy(Enemy):
         self.speed = 40
         self.width = 10
         self.height = 9
-        self.gainedScore = 50
+        self.gained_score = 50
         self.health = 1
         self.shots = []
 

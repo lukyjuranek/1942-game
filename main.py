@@ -14,15 +14,16 @@ from math import pi
 
 def update():
     # Updates all the elements in the game
-    board.updateAll()
+    board.update_all()
     # Checks all the collisions in the game
-    board.checkAllCollisions()
+    board.check_all_collisions()
 
 
 def draw():
     pyxel.cls(6)
     # Draws all the elements in the game
-    board.drawAll()
+    board.draw_all()
+
 
 # Initializes the board object
 board = Board()
