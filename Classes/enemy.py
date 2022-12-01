@@ -12,7 +12,8 @@ class Enemy:
         self.speed = 1
         self.width = 10
         self.height = 9
-        #self.gainedScore = 100 # TODO: Change this varibale name
+        self.health = 1
+        self.gainedScore = 100 # TODO: Change this varibale name
         self.shots = []
 
     @property
@@ -24,7 +25,7 @@ class Enemy:
         if type(value) != float:
             raise TypeError("The angle must be a float")
         else:
-            self.angle = value
+            self.__angle = value
 
     @property
     def x(self):
@@ -32,7 +33,7 @@ class Enemy:
 
     @x.setter
     def x(self, val):
-        if type(val) != float or type(val) != int:
+        if type(val) != float and type(val) != int:
             raise TypeError("The coordinate must be an integer")
         else:
             self.__x = val
@@ -43,7 +44,7 @@ class Enemy:
 
     @y.setter
     def y(self, val):
-        if type(val) != float or type(val) != int:
+        if type(val) != float and type(val) != int:
             raise TypeError("The coordinate must be an integer")
         else:
             self.__y = val
