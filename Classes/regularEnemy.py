@@ -1,5 +1,6 @@
 from Classes.enemy import Enemy
-
+import pyxel
+from math import pi
 
 class RegularEnemy(Enemy):
     def __init__(self, x, y, angle):
@@ -22,6 +23,11 @@ class RegularEnemy(Enemy):
         else:
             self.__health = value
 
-
-
-
+    def draw(self):
+        '''Draws the enemy'''
+        if self.angle == 3*pi/2:
+            pyxel.blt(self.x, self.y, 0, 3, 28, self.width, self.height, 0)
+        elif self.angle == pi/2:
+            pyxel.blt(self.x, self.y, 0, 3, 43, self.width, self.height, 0)
+        else:
+            raise Exception("The angle of the enemy is not supported")
