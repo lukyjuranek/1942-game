@@ -1,6 +1,11 @@
 from Classes.player import Player
 from Classes.enemy import Enemy
+from Classes.redEnemy import RedEnemy
+from Classes.regularEnemy import RegularEnemy
+from Classes.bombardier import Bombardier
+from Classes.superBomardier import SuperBombardier
 import pyxel
+from random import randint
 
 
 class Board:
@@ -11,7 +16,6 @@ class Board:
         self.player = Player(self.width/2, self.height - 40)
         self.enemies = []
         self.enemy_shots = []
-        self.frameRate = 60
 
     def update_all(self):
         """Updates all the elements in the game and does the according actions(like removing enemies)"""
@@ -30,6 +34,14 @@ class Board:
         # Updates the shots
         for shot in self.player.shots:
             shot.update()
+
+        # Randomly adds an enemy
+        if randint(0, 100) == 1:
+            self.enemies.append(RegularEnemy(randint(0, self.width), 0, 90))
+        if randint(0, 100) == 1:
+            self.enemies.append(RedEnemy(0, randint(0, self.height), 0))
+        # if randint(0, 100) == 1:
+        #     self.enemies.append(Bombardier(randint(0, self.width), 0, 90))
 
     def draw_text(self):
         """Draws the text elements in the game"""
