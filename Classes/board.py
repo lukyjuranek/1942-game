@@ -20,6 +20,9 @@ class Board:
 
         # Updates the enemy positions and their shots
         for enemy in self.enemies:
+            # Removes the enemy if it has 0 health
+            if enemy.health <= 0:
+                self.enemies.remove(enemy)
             enemy.update()
             for shot in enemy.shots:
                 shot.update()
@@ -44,7 +47,7 @@ class Board:
             enemy.draw()
             for shot in enemy.shots:
                 shot.draw()
-                
+
         # Draws the shots
         for shot in self.player.shots:
             shot.draw()
