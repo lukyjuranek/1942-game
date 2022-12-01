@@ -1,4 +1,5 @@
 import pyxel
+from Classes.frameRate import FrameRate
 from math import sin, cos, radians
 
 class Shot:
@@ -12,8 +13,8 @@ class Shot:
 
     def update(self):
         '''Updates the shot position'''
-        self.x += self.speed * cos(radians(self.angle))
-        self.y += self.speed * sin(radians(self.angle))
+        self.x += self.speed * cos(radians(self.angle)) * FrameRate.delta_time
+        self.y += self.speed * sin(radians(self.angle)) * FrameRate.delta_time
 
     def draw(self):
         '''Draws the shot'''

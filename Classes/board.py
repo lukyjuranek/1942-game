@@ -13,6 +13,7 @@ class Board:
         self.player = Player(self.width/2, self.height - 40)
         self.enemies = []
         self.enemyShots = []
+        self.frameRate = 60
 
     def updateAll(self):
         '''Updates all the elements in the game and does the according actions(like removing enemies)'''

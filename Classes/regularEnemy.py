@@ -1,11 +1,12 @@
 from Classes.enemy import Enemy
+from Classes.frameRate import FrameRate
 import pyxel
 from math import pi
 
 class RegularEnemy(Enemy):
     def __init__(self, x, y, angle):
         super().__init__(x, y, angle)
-        self.speed = 2
+        self.speed = 40
         self.width = 10
         self.height = 9
         self.gainedScore = 50
