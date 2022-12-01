@@ -78,5 +78,5 @@ class Player:
     def shoot(self):
         """Shoots from the player(Creates an instance of the shot class)"""
         # Creates an instance of the shot class
-        self.shots.append(Shot(self.x, self.y, 180, 270))
-        self.shots.append(Shot(self.x + self.width, self.y, 180, 270))
+        self.shots.append(Shot(self.x, self.y, 180, 270, "player"))
+        self.shots.append(Shot(self.x + self.width, self.y, 180, 270, "player"))

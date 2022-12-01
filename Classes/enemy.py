@@ -64,7 +64,7 @@ class Enemy:
 
         self.x += self.speed * cos(radians(self.angle)) * constants.DELTA_TIME
         self.y += self.speed * sin(radians(self.angle)) * constants.DELTA_TIME
-        if randint(0, 50) == 1:
+        if randint(0, 100) == 1:
             self.shoot()
 
         # Remove the shots that go off the screen
@@ -86,4 +86,4 @@ class Enemy:
     def shoot(self):
         """Shoots from the enemy(Creates an instance of the shot class)"""
         # Creates an instance of the shot class
-        self.shots.append(Shot(self.x, self.y, 100, self.angle))
+        self.shots.append(Shot(self.x, self.y, 60, self.angle, "enemy"))

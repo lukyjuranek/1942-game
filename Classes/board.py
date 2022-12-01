@@ -35,7 +35,7 @@ class Board:
         for shot in self.player.shots:
             shot.update()
 
-        # Randomly adds an enemy
+        # Randomly spawns enemies
         if randint(0, 100) == 1:
             self.enemies.append(RegularEnemy(randint(0, self.width), 0, 90))
         if randint(0, 100) == 1:
