@@ -22,7 +22,7 @@ class Enemy:
 
     @angle.setter
     def angle(self, value):
-        if type(value) != float:
+        if type(value) != float and type(value) != int:
             raise TypeError("The angle must be a float")
         else:
             self.__angle = value
