@@ -17,6 +17,30 @@ class Board:
         self.enemies = []
         self.enemy_shots = []
 
+    def update(self):
+        # Updates all the elements in the game
+        self.update_all()
+        # Checks all the collisions in the game
+        self.check_all_collisions()
+
+    def draw(self):
+        """Draws all the elements in the game"""
+        pyxel.cls(6)
+        # Draws the text elements
+        self.draw_text()
+
+        # Draws the player
+        self.player.draw()
+        # Draws the enemies and their shots
+        for enemy in self.enemies:
+            enemy.draw()
+            for shot in enemy.shots:
+                shot.draw()
+
+        # Draws the shots
+        for shot in self.player.shots:
+            shot.draw()
+
     def update_all(self):
         """Updates all the elements in the game and does the according actions(like removing enemies)"""
         # Updates the player position
@@ -48,23 +72,6 @@ class Board:
         pyxel.text(0, 0, str(self.player.score), 7)
         pyxel.text(self.width/2, 0, "1942", 7)
 
-    def draw_all(self):
-        """Draws all the elements in the game"""
-        # Draws the text elements
-        self.draw_text()
-
-        # Draws the player
-        self.player.draw()
-        # Draws the enemies and their shots
-        for enemy in self.enemies:
-            enemy.draw()
-            for shot in enemy.shots:
-                shot.draw()
-
-        # Draws the shots
-        for shot in self.player.shots:
-            shot.draw()
-
     def check_collision(self, ob1, ob2):
         """Checks if the ob1(object1) and ob2(object2) are overlapping"""
         if ob1.x < ob2.x + ob2.width and ob1.x + ob1.width > ob2.x and ob1.y < ob2.y + ob2.height and ob1.height + ob1.y > ob2.y:
@@ -89,26 +96,10 @@ class Board:
                     self.player.score += enemy.gained_score
                     self.enemies.remove(enemy)
 
+                    self.player.shots.remove(shot)
+
         # Checks if any enemy has shot the player
         for enemy in self.enemies:
             for shot in enemy.shots:
                 if self.check_collision(shot, self.player):
                     print("Player has been shots ny an enemy")
-
-        # TODO: Remove this code
-        #         print("Player has been shots ny an enemy")
-        # # Checks if any enemy has collided with the player
-        # if CollisionChecker.checkCollisionList(self.player, self.enemies):
-        #     print("Player has collided with an enemy")
-        #     # TODO: Reset game and remove a life
-
-        # # Checks if the player has shot an enemy
-        # if CollisionChecker.checkCollisionListList(self.player.shots, self.enemies):
-        #     print("An enemy has been hit by the player")
-        #     # Adds the score to the player
-        #     self.player.score += enemy.gainedScore
-        #     self.enemies.remove(enemy)
-
-        # # Checks if any has shot  the player
-        # for enemy in self.enemies:
-        #     if CollisionChecker.checkCollisionList(self.player, enemy.shots):

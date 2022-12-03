@@ -11,19 +11,6 @@ from Classes.superBomardier import SuperBombardier
 import constants
 from math import pi
 
-
-def update():
-    # Updates all the elements in the game
-    board.update_all()
-    # Checks all the collisions in the game
-    board.check_all_collisions()
-
-
-def draw():
-    pyxel.cls(6)
-    # Draws all the elements in the game
-    board.draw_all()
-
 # Initializes the board object
 board = Board()
 
@@ -38,4 +25,4 @@ board.enemies.append(RedEnemy(120, 30, 180))
 # Initializes and runs pyxel and loads the resources
 pyxel.init(board.width, board.height, "1942", fps=constants.FRAME_RATE)  # type: ignore
 pyxel.load("pyxel_resource_file.pyxres")
-pyxel.run(update, draw)
+pyxel.run(board.update, board.draw)
