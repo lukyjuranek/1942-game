@@ -1,6 +1,6 @@
 from Classes.shot import Shot
 import constants
-from math import pi
+from math import pi, cos, sin, radians
 import pyxel
 
 class Player:
@@ -50,17 +50,46 @@ class Player:
 
     def update(self):
         """Updates the player position and shoots if the appropriate key is pressed"""
-        if pyxel.btn(pyxel.KEY_LEFT) and self.x > 0:
+
+        # Booleeans that check if the player is on the edge of the screen
+        top_edge = self.y > 0
+        right_edge = self.x < pyxel.width - self.width
+        left_edge = self.x > 0
+        bottom_edge = self.y < pyxel.height - self.height
+
+        # X and Y distances used for the diagonal movement
+        diag_a = sin(radians(45))
+        diag_b = cos(radians(45))
+
+        if pyxel.btn(pyxel.KEY_LEFT) and pyxel.btn(pyxel.KEY_UP) and left_edge and top_edge:
+            # LEFT + UP
+            self.x -= self.speed * diag_a * constants.DELTA_TIME
+            self.y -= self.speed * diag_b * constants.DELTA_TIME
+        elif pyxel.btn(pyxel.KEY_LEFT) and pyxel.btn(pyxel.KEY_DOWN) and left_edge and bottom_edge:
+            # LEFT + DOWN
+            self.x -= self.speed * diag_a * constants.DELTA_TIME
+            self.y += self.speed * diag_b * constants.DELTA_TIME
+        elif pyxel.btn(pyxel.KEY_RIGHT) and pyxel.btn(pyxel.KEY_UP) and right_edge and top_edge:
+            # RIGHT + UP
+            self.x += self.speed * diag_a * constants.DELTA_TIME
+            self.y -= self.speed * diag_b * constants.DELTA_TIME
+        elif pyxel.btn(pyxel.KEY_RIGHT) and pyxel.btn(pyxel.KEY_DOWN) and right_edge and bottom_edge:
+            # RIGHT + DOWN
+            self.x += self.speed * diag_a * constants.DELTA_TIME
+            self.y += self.speed * diag_b * constants.DELTA_TIME
+        elif pyxel.btn(pyxel.KEY_LEFT) and left_edge:
+            # LEFT
             self.x -= self.speed * constants.DELTA_TIME
-
-        if pyxel.btn(pyxel.KEY_RIGHT) and self.x < pyxel.width - self.width:
+        elif pyxel.btn(pyxel.KEY_RIGHT) and right_edge:
+            # RIGHT
             self.x += self.speed * constants.DELTA_TIME
-
-        if pyxel.btn(pyxel.KEY_UP) and self.y > 0:
+        elif pyxel.btn(pyxel.KEY_UP) and top_edge:
+            # UP
             self.y -= self.speed * constants.DELTA_TIME
-        
-        if pyxel.btn(pyxel.KEY_DOWN) and self.y < pyxel.height - self.height:
+        elif pyxel.btn(pyxel.KEY_DOWN) and bottom_edge:
+            # DOWN
             self.y += self.speed * constants.DELTA_TIME
+
 
         if pyxel.btnp(pyxel.KEY_SPACE):
             self.shoot()
