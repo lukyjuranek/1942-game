@@ -6,7 +6,7 @@ from Classes.enemy import Enemy
 from Classes.redEnemy import RedEnemy
 from Classes.regularEnemy import RegularEnemy
 from Classes.bombardier import Bombardier
-from Classes.superBomardier import SuperBombardier
+from Classes.superBombardier import SuperBombardier
 # from Classes.collisionChecker import CollisionChecker
 import constants
 from math import pi

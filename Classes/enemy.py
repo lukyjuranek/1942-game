@@ -11,9 +11,9 @@ class Enemy:
         self.x = x
         self.y = y
         self.angle = angle
-        self.speed = 60
-        self.width = 10
-        self.height = 9
+        # self.speed = 60
+        # self.width = 10
+        # self.height = 9
         self.health = 1
         self.gained_score = 100  # TODO: Change this variable name
         self.shots = []
@@ -73,17 +73,17 @@ class Enemy:
             if shot.x - shot.width < 0 or shot.x > pyxel.width or shot.y - shot.height < 0 or shot.y > pyxel.height:
                 self.shots.remove(shot)
 
-    def draw(self):
-        """Draws the enemy"""
+    # def draw(self):
+    #     """Draws the enemy"""
 
-        if self.angle == 90:
-            pyxel.blt(self.x, self.y, 0, 3, 28, self.width, self.height, 0)
-        elif self.angle == 270:
-            pass
-        else:
-            raise Exception("The angle of the enemy is not supported")
+    #     if self.angle == 90:
+    #         pyxel.blt(self.x, self.y, 0, 3, 28, self.width, self.height, 0)
+    #     elif self.angle == 270:
+    #         pass
+    #     else:
+    #         raise Exception("The angle of the enemy is not supported")
 
     def shoot(self):
         """Shoots from the enemy(Creates an instance of the shot class)"""
         # Creates an instance of the shot class
-        self.shots.append(Shot(self.x, self.y, 60, self.angle, "enemy"))
+        self.shots.append(Shot(self.x, self.y, 70, self.angle, "enemy"))

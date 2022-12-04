@@ -3,7 +3,7 @@ from Classes.enemy import Enemy
 from Classes.redEnemy import RedEnemy
 from Classes.regularEnemy import RegularEnemy
 from Classes.bombardier import Bombardier
-from Classes.superBomardier import SuperBombardier
+from Classes.superBombardier import SuperBombardier
 import pyxel
 from random import randint
 
@@ -46,6 +46,10 @@ class Board:
         # Updates the player position
         self.player.update()
 
+        # Updates the player's shots
+        for shot in self.player.shots:
+            shot.update()
+
         # Updates the enemy positions and their shots
         for enemy in self.enemies:
             # Removes the enemy if it has 0 health
@@ -54,10 +58,6 @@ class Board:
             enemy.update()
             for shot in enemy.shots:
                 shot.update()
-
-        # Updates the shots
-        for shot in self.player.shots:
-            shot.update()
 
         # Randomly spawns enemies
         if randint(0, 100) == 1:
@@ -69,8 +69,12 @@ class Board:
 
     def draw_text(self):
         """Draws the text elements in the game"""
-        pyxel.text(0, 0, str(self.player.score), 7)
-        pyxel.text(self.width/2, 0, "1942", 7)
+        pyxel.text(2, 2, "SCORE", 7)
+        pyxel.text(2, 10, str(self.player.score), 7)
+        pyxel.text(self.width/2-15, 2, "HIGH SCORE", 7)
+        pyxel.text(self.width/2-10, 10, str(self.player.high_score), 7)
+
+    
 
     def check_collision(self, ob1, ob2):
         """Checks if the ob1(object1) and ob2(object2) are overlapping"""
@@ -94,6 +98,9 @@ class Board:
                     print("An enemy has been hit by the player")
                     # Adds the score to the player
                     self.player.score += enemy.gained_score
+                    if self.player.score > self.player.high_score:
+                        self.player.high_score = self.player.score
+
                     self.enemies.remove(enemy)
 
                     self.player.shots.remove(shot)

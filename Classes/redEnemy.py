@@ -7,12 +7,24 @@ from math import pi
 class RedEnemy(Enemy):
     def __init__(self, x, y, angle):
         super().__init__(x, y, angle)
-        self.speed = 80
-        self.width = 10
-        self.height = 10
+        # self.speed = 50
+        # self.width = 10
+        # self.height = 10
         self.gained_score = 100
         self.health = 2
         self.shots = []
+
+    @property
+    def speed(self):
+        return 50
+
+    @property
+    def width(self):
+        return 10
+    
+    @property
+    def height(self):
+        return 10
 
     @property
     def health(self):
