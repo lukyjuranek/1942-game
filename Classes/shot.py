@@ -13,20 +13,22 @@ class Shot:
 
     @property
     def width(self):
+        """ This attribute is defined here and not in the init method in order for it to be read only. """
         return 4
     
     @property
     def height(self):
+        """ This attribute is defined here and not in the init method in order for it to be read only. """
         return 4
 
     def update(self):
-        '''Updates the shot position'''
+        """" Updates the shot position """
         self.x += self.speed * cos(radians(self.angle)) * constants.DELTA_TIME
         self.y += self.speed * sin(radians(self.angle)) * constants.DELTA_TIME
 
 
     def draw(self):
-        '''Draws the shot'''
+        """Draws the shot"""
         if self.shot_type == "player":
             pyxel.blt(self.x, self.y, 0, 0, 16, self.width, self.height, 0)
         elif self.shot_type == "enemy":
