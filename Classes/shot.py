@@ -8,10 +8,16 @@ class Shot:
         self.y = y
         self.speed = speed
         self.angle = angle
-        self.width = 4
-        self.height = 4
         self.shot_type = shot_type
         # TODO: Change speed of shots depending on the type of shot
+
+    @property
+    def width(self):
+        return 4
+    
+    @property
+    def height(self):
+        return 4
 
     def update(self):
         '''Updates the shot position'''

@@ -6,12 +6,21 @@ from math import pi
 class RegularEnemy(Enemy):
     def __init__(self, x, y, angle):
         super().__init__(x, y, angle)
-        self.speed = 40
-        self.width = 10
-        self.height = 9
         self.gained_score = 50
         self.health = 1
         self.shots = []
+
+    @property
+    def speed(self):
+        return 40
+
+    @property
+    def width(self):
+        return 10
+    
+    @property
+    def height(self):
+        return 10
 
     @property
     def health(self):

@@ -95,6 +95,12 @@ class Player:
         if pyxel.btnp(pyxel.KEY_SPACE):
             self.shoot()
 
+        # Lets us pause the game for testing purposes
+        if pyxel.btnp(pyxel.KEY_P):
+            constants.DELTA_TIME = 0
+        if pyxel.btnr(pyxel.KEY_P):
+            constants.DELTA_TIME = 1/constants.FRAME_RATE
+
         # Remove the shots that go off the screen
         for shot in self.shots:
             # Destroys the shot if it goes out of the screen

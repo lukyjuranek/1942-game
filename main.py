@@ -21,6 +21,10 @@ board.enemies.append(RedEnemy(40, 10, 90))
 board.enemies.append(RedEnemy(120, 30, 270))
 board.enemies.append(RedEnemy(40, 10, 0))
 board.enemies.append(RedEnemy(120, 30, 180))
+board.enemies.append(RedEnemy(40, 10, 45))
+board.enemies.append(RedEnemy(120, 30, 315))
+board.enemies.append(RedEnemy(40, 10, 135))
+board.enemies.append(RedEnemy(120, 30, 225))
 
 # Initializes and runs pyxel and loads the resources
 pyxel.init(board.width, board.height, "1942", fps=constants.FRAME_RATE)  # type: ignore

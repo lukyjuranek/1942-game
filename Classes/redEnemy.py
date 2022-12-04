@@ -7,9 +7,6 @@ from math import pi
 class RedEnemy(Enemy):
     def __init__(self, x, y, angle):
         super().__init__(x, y, angle)
-        # self.speed = 50
-        # self.width = 10
-        # self.height = 10
         self.gained_score = 100
         self.health = 2
         self.shots = []
@@ -52,6 +49,18 @@ class RedEnemy(Enemy):
         elif self.angle == 0:
             # RIGHT
             pyxel.blt(self.x, self.y, 0, 35, 75, self.width, self.height, 0)
+        elif self.angle == 315:
+            # RIGHT UP
+            pyxel.blt(self.x, self.y, 0, 51, 76, self.width, self.height, 0)
+        elif self.angle == 45:
+            # RIGHT DOWN
+            pyxel.blt(self.x, self.y, 0, 19, 75, self.width, self.height, 0)
+        elif self.angle == 135:
+            # LEFT DOWN
+            pyxel.blt(self.x, self.y, 0, 52, 58, self.width, self.height, 0)
+        elif self.angle == 225:
+            # LEFT UP
+            pyxel.blt(self.x, self.y, 0, 36, 60, self.width, self.height, 0)
         else:
             print("angle: ", self.angle)
             raise Exception("The angle of the enemy is not supported")
