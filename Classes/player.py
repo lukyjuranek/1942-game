@@ -15,6 +15,8 @@ class Player:
         self.score = 0
         self.high_score = 0
         self.shots = []
+        self.is_doing_loop = False
+        self.loop_distance = 40
 
     @property
     def x(self):
@@ -62,38 +64,50 @@ class Player:
         diag_a = sin(radians(45))
         diag_b = cos(radians(45))
 
-        if pyxel.btn(pyxel.KEY_LEFT) and pyxel.btn(pyxel.KEY_UP) and left_edge and top_edge:
-            # LEFT + UP
-            self.x -= self.speed * diag_a * constants.DELTA_TIME
-            self.y -= self.speed * diag_b * constants.DELTA_TIME
-        elif pyxel.btn(pyxel.KEY_LEFT) and pyxel.btn(pyxel.KEY_DOWN) and left_edge and bottom_edge:
-            # LEFT + DOWN
-            self.x -= self.speed * diag_a * constants.DELTA_TIME
-            self.y += self.speed * diag_b * constants.DELTA_TIME
-        elif pyxel.btn(pyxel.KEY_RIGHT) and pyxel.btn(pyxel.KEY_UP) and right_edge and top_edge:
-            # RIGHT + UP
-            self.x += self.speed * diag_a * constants.DELTA_TIME
-            self.y -= self.speed * diag_b * constants.DELTA_TIME
-        elif pyxel.btn(pyxel.KEY_RIGHT) and pyxel.btn(pyxel.KEY_DOWN) and right_edge and bottom_edge:
-            # RIGHT + DOWN
-            self.x += self.speed * diag_a * constants.DELTA_TIME
-            self.y += self.speed * diag_b * constants.DELTA_TIME
-        elif pyxel.btn(pyxel.KEY_LEFT) and left_edge:
-            # LEFT
-            self.x -= self.speed * constants.DELTA_TIME
-        elif pyxel.btn(pyxel.KEY_RIGHT) and right_edge:
-            # RIGHT
-            self.x += self.speed * constants.DELTA_TIME
-        elif pyxel.btn(pyxel.KEY_UP) and top_edge:
-            # UP
-            self.y -= self.speed * constants.DELTA_TIME
-        elif pyxel.btn(pyxel.KEY_DOWN) and bottom_edge:
-            # DOWN
-            self.y += self.speed * constants.DELTA_TIME
+        if not self.is_doing_loop:
+            # Player movement
+            if pyxel.btn(pyxel.KEY_LEFT) and pyxel.btn(pyxel.KEY_UP) and left_edge and top_edge:
+                # LEFT + UP
+                self.x -= self.speed * diag_a * constants.DELTA_TIME
+                self.y -= self.speed * diag_b * constants.DELTA_TIME
+            elif pyxel.btn(pyxel.KEY_LEFT) and pyxel.btn(pyxel.KEY_DOWN) and left_edge and bottom_edge:
+                # LEFT + DOWN
+                self.x -= self.speed * diag_a * constants.DELTA_TIME
+                self.y += self.speed * diag_b * constants.DELTA_TIME
+            elif pyxel.btn(pyxel.KEY_RIGHT) and pyxel.btn(pyxel.KEY_UP) and right_edge and top_edge:
+                # RIGHT + UP
+                self.x += self.speed * diag_a * constants.DELTA_TIME
+                self.y -= self.speed * diag_b * constants.DELTA_TIME
+            elif pyxel.btn(pyxel.KEY_RIGHT) and pyxel.btn(pyxel.KEY_DOWN) and right_edge and bottom_edge:
+                # RIGHT + DOWN
+                self.x += self.speed * diag_a * constants.DELTA_TIME
+                self.y += self.speed * diag_b * constants.DELTA_TIME
+            elif pyxel.btn(pyxel.KEY_LEFT) and left_edge:
+                # LEFT
+                self.x -= self.speed * constants.DELTA_TIME
+            elif pyxel.btn(pyxel.KEY_RIGHT) and right_edge:
+                # RIGHT
+                self.x += self.speed * constants.DELTA_TIME
+            elif pyxel.btn(pyxel.KEY_UP) and top_edge:
+                # UP
+                self.y -= self.speed * constants.DELTA_TIME
+            elif pyxel.btn(pyxel.KEY_DOWN) and bottom_edge:
+                # DOWN
+                self.y += self.speed * constants.DELTA_TIME
 
 
-        if pyxel.btnp(pyxel.KEY_SPACE):
-            self.shoot()
+            if pyxel.btnp(pyxel.KEY_SPACE):
+                self.shoot()
+
+            if pyxel.btnp(pyxel.KEY_Z):
+                self.is_doing_loop = True
+        else:
+            # Loop movement
+            self.loop_distance -= self.speed * constants.DELTA_TIME / 4
+            self.y += self.speed * constants.DELTA_TIME / 4
+            if self.loop_distance <= 0 or not bottom_edge:
+                self.is_doing_loop = False
+                self.loop_distance = 40
 
         # Lets us pause the game for testing purposes
         if pyxel.btnp(pyxel.KEY_P):
@@ -109,7 +123,11 @@ class Player:
 
     def draw(self):
         """Draws the player"""
-        pyxel.blt(self.x, self.y, 0, 0, 2, self.width, self.height, 0)
+        if self.is_doing_loop:
+            # TODO: Change the sprite to the upside down one
+            pyxel.blt(self.x, self.y, 0, 16, 1, self.width, self.height, 0)
+        else:
+            pyxel.blt(self.x, self.y, 0, 0, 2, self.width, self.height, 0)
 
     def shoot(self):
         """Shoots from the player(Creates an instance of the shot class)"""

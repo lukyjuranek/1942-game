@@ -4,6 +4,7 @@ from Classes.redEnemy import RedEnemy
 from Classes.regularEnemy import RegularEnemy
 from Classes.bombardier import Bombardier
 from Classes.superBombardier import SuperBombardier
+import constants
 import pyxel
 from random import randint
 
@@ -16,6 +17,7 @@ class Board:
         self.player = Player(self.width/2, self.height - 40)
         self.enemies = []
         self.enemy_shots = []
+        self.bg_offset = 0
 
     def update(self):
         # Updates all the elements in the game
@@ -23,9 +25,16 @@ class Board:
         # Checks all the collisions in the game
         self.check_all_collisions()
 
+        # Makes the background scroll
+        self.bg_offset += self.player.speed * constants.DELTA_TIME /2
+        if self.bg_offset > 16:
+            self.bg_offset = 0
+
     def draw(self):
         """Draws all the elements in the game"""
         pyxel.cls(6)
+        # Draws the background
+        self.draw_background()
         # Draws the text elements
         self.draw_text()
 
@@ -74,7 +83,11 @@ class Board:
         pyxel.text(self.width/2-15, 2, "HIGH SCORE", 7)
         pyxel.text(self.width/2-10, 10, str(self.player.high_score), 7)
 
-    
+    def draw_background(self):
+        """Draws the background of the game"""
+        for x in range(0, self.width//16+1):
+            for y in range(-16, self.height//16+1):
+                pyxel.blt(x*16, y*16 + self.bg_offset, 0, 80, 144, 16, 16, 0)
 
     def check_collision(self, ob1, ob2):
         """Checks if the ob1(object1) and ob2(object2) are overlapping"""
@@ -85,11 +98,20 @@ class Board:
 
     def check_all_collisions(self):
         """Checks all the collisions in the game and does the according actions"""
-        # Checks if any enemy has collided with the player
-        for enemy in self.enemies:
-            if self.check_collision(self.player, enemy):
-                print("Player has collided with an enemy")
-                # TODO: Reset game and remove a life
+
+        if not self.player.is_doing_loop:
+            
+            # Checks if any enemy has collided with the player
+            for enemy in self.enemies:
+                if self.check_collision(self.player, enemy):
+                    print("Player has collided with an enemy")
+                    # TODO: Reset game and remove a life
+
+            # Checks if any enemy has shot the player
+            for enemy in self.enemies:
+                for shot in enemy.shots:
+                    if self.check_collision(shot, self.player):
+                        print("Player has been shots ny an enemy")
 
         # Checks if the player has shot an enemy
         for enemy in self.enemies:
@@ -104,9 +126,3 @@ class Board:
                     self.enemies.remove(enemy)
 
                     self.player.shots.remove(shot)
-
-        # Checks if any enemy has shot the player
-        for enemy in self.enemies:
-            for shot in enemy.shots:
-                if self.check_collision(shot, self.player):
-                    print("Player has been shots ny an enemy")
