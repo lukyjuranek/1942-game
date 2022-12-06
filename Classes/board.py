@@ -20,6 +20,8 @@ class Board:
         self.high_score = 0
         self.bg_offset = 0
         self.game_state = "start_screen"
+        self.island_position_x = 30
+        self.island_position_y = -40
 
     def update(self):
         """Updates the game"""
@@ -70,6 +72,8 @@ class Board:
         pyxel.cls(6)
         # Draws the background
         self.draw_background()
+        self.draw_and_update_island()
+
         # Draws the text elements
         self.draw_stats()
 
@@ -84,6 +88,7 @@ class Board:
         # Draws the shots
         for shot in self.player.shots:
             shot.draw()
+
 
     def update_game_elements(self):
         """Updates all the elements in the game and does the according actions(like removing enemies)"""
@@ -123,6 +128,14 @@ class Board:
         pyxel.text(self.width-20, 10, str(self.player.lives)+"x", 7)
         pyxel.blt(self.width-10, 8, 0, 16, 16, 8, 8, 0)
 
+    def draw_and_update_island(self):
+        """Draws the player"""
+        self.island_position_y += self.player.speed * constants.DELTA_TIME /5
+        pyxel.blt(self.island_position_x, self.island_position_y, 0, 89, 114, 30, 30, 0)
+        if self.island_position_y > self.height:
+            self.island_position_y = -60
+            self.island_position_x = randint(0, self.width-30)
+            
 
     def draw_background(self):
         """Draws the background of the game"""
