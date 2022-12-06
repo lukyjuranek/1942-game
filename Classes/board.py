@@ -22,6 +22,7 @@ class Board:
         self.game_state = "start_screen"
         self.island_position_x = 30
         self.island_position_y = -40
+        self.high_score = 0
 
     def update(self):
         """Updates the game"""
