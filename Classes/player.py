@@ -13,13 +13,12 @@ class Player:
         self.speed = 120
         self.lives = 3
         self.score = 0
-        self.high_score = 0
         self.shots = []
+        self.invincible = False
         self.is_doing_loop = False
         self.loop_distance = 40
         self.flash_red = False
         self.hit_indicator_timer = 0
-        self.invincible = False
 
     @property
     def x(self):
