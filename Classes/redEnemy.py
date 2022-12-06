@@ -1,7 +1,8 @@
 from Classes.enemy import Enemy
 import constants
 import pyxel
-from math import pi
+from math import pi, cos, sin, radians
+from random import randint
 
 
 class RedEnemy(Enemy):
@@ -33,6 +34,28 @@ class RedEnemy(Enemy):
             raise TypeError("The health can be only an integer")
         else:
             self.__health = value
+
+
+    def update(self):
+        """Updates the enemy position and shoots"""
+        # Randomly changes the angle of the plane
+        if pyxel.frame_count % 60 == 0 and randint(0, 2) == 1:
+            self.angle += 45 * randint(-2, 2)
+
+        # Destroys the plane if it goes out of the screen by more than 30 pixels
+        if self.x - self.width < -30 or self.x > pyxel.width + 30 or self.y - self.height < -30 or self.y > pyxel.height + 30:
+            self.health = 0
+
+        self.x += self.speed * cos(radians(self.angle)) * constants.DELTA_TIME
+        self.y += self.speed * sin(radians(self.angle)) * constants.DELTA_TIME
+        if randint(0, 100) == 1:
+            self.shoot()
+
+        # Remove the shots that go off the screen
+        for shot in self.shots:
+            # Destroys the shot if it goes out of the screen
+            if shot.x - shot.width < 0 or shot.x > pyxel.width or shot.y - shot.height < 0 or shot.y > pyxel.height:
+                self.shots.remove(shot)
 
     def draw(self):
         """Draws the enemy"""

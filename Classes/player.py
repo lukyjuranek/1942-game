@@ -17,6 +17,9 @@ class Player:
         self.shots = []
         self.is_doing_loop = False
         self.loop_distance = 40
+        self.flash_red = False
+        self.hit_indicator_timer = 0
+        self.invincible = False
 
     @property
     def x(self):
@@ -101,12 +104,14 @@ class Player:
 
             if pyxel.btnp(pyxel.KEY_Z):
                 self.is_doing_loop = True
+                self.invincible = True
         else:
             # Loop movement
             self.loop_distance -= self.speed * constants.DELTA_TIME / 4
             self.y += self.speed * constants.DELTA_TIME / 4
             if self.loop_distance <= 0 or not bottom_edge:
                 self.is_doing_loop = False
+                self.invincible = False
                 self.loop_distance = 40
 
         # Lets us pause the game for testing purposes
@@ -124,19 +129,42 @@ class Player:
     def draw(self):
         """Draws the player"""
         if self.is_doing_loop:
+            # Draws the plane propeller
             if pyxel.frame_count % 4 == 0:
                 pyxel.blt(self.x+5, self.y+self.height, 0, 0, 22, 6, 1, 0)
             else:
                 pyxel.blt(self.x+5, self.y+self.height, 0, 0, 23, 6, 1, 0)
-            
+            # Draws the plane
             pyxel.blt(self.x, self.y, 0, 16, 0, self.width, self.height, 0)
         else:
+            # Draws the plane propeller
             if pyxel.frame_count % 4 == 0:
                 pyxel.blt(self.x+5, self.y-1, 0, 0, 22, 6, 1, 0)
             else:
                 pyxel.blt(self.x+5, self.y-1, 0, 0, 23, 6, 1, 0)
 
-            pyxel.blt(self.x, self.y, 0, 0, 2, self.width, self.height, 0)
+            # Toggles the hit_indicator which makes the plane flash red when hit
+            if pyxel.frame_count % 20 == 0 and self.hit_indicator_timer > 0:
+                self.hit_indicator_timer -= 1
+                # Toggles the hit indicator to make it blink
+                self.flash_red = not self.flash_red
+            elif self.hit_indicator_timer == 0:
+                self.flash_red = False
+                self.invincible = False
+
+
+            # Draws the plane
+            if self.flash_red:
+                pyxel.blt(self.x, self.y, 0, 32, 2, self.width, self.height, 0)
+            else:
+                pyxel.blt(self.x, self.y, 0, 0, 2, self.width, self.height, 0)
+
+    def register_hit(self):
+        """Does the necessary actions when the player is hit."""
+        self.lives -= 1
+        # Starts flashing red
+        self.hit_indicator_timer = 5
+        self.invincible = True
 
     def shoot(self):
         """Shoots from the player(Creates an instance of the shot class)"""

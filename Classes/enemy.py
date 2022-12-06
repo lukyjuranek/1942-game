@@ -35,7 +35,13 @@ class Enemy:
         if type(value) != float and type(value) != int:
             raise TypeError("The angle must be a float")
         else:
-            self.__angle = value
+            # Makes the angle positive
+            if value < 0:
+                self.__angle = -value
+            elif value == 360:
+                self.__angle = 0
+            else:
+                self.__angle = value
 
     @property
     def health(self):
@@ -47,6 +53,17 @@ class Enemy:
             raise TypeError("The health can be only an integer")
         else:
             self.__health = value
+        
+    @property
+    def speed(self):
+        return 40
+
+    @speed.setter
+    def speed(self, value):
+        if type(value) != int and value < 0:
+            raise TypeError("The speed can be only an integer and greater than or equal to 0")
+        else:
+            self.__speed = value
 
     @property
     def x(self):
@@ -72,10 +89,6 @@ class Enemy:
 
     def update(self):
         """Updates the enemy position and shoots"""
-        # Randomly changes the angle of the plane
-        # if randint(0, 20) == 1:
-        #     self.angle += pi * randint(-1, 1)
-
         # Destroys the plane if it goes out of the screen by more than 30 pixels
         # TODO: Make this a constant and review the value
         if self.x - self.width < -30 or self.x > pyxel.width + 30 or self.y - self.height < -30 or self.y > pyxel.height + 30:
