@@ -26,7 +26,7 @@ class Board:
         self.check_all_collisions()
 
         # Makes the background scroll
-        self.bg_offset += self.player.speed * constants.DELTA_TIME /2
+        self.bg_offset += self.player.speed * constants.DELTA_TIME /5
         if self.bg_offset > 16:
             self.bg_offset = 0
 
@@ -42,9 +42,9 @@ class Board:
         self.player.draw()
         # Draws the enemies and their shots
         for enemy in self.enemies:
-            enemy.draw()
             for shot in enemy.shots:
                 shot.draw()
+            enemy.draw()
 
         # Draws the shots
         for shot in self.player.shots:
@@ -87,7 +87,7 @@ class Board:
         """Draws the background of the game"""
         for x in range(0, self.width//16+1):
             for y in range(-16, self.height//16+1):
-                pyxel.blt(x*16, y*16 + self.bg_offset, 0, 80, 144, 16, 16, 0)
+                pyxel.blt(x*16, y*16 + self.bg_offset, 0, 32, 0, 16, 16, 0)
 
     def check_collision(self, ob1, ob2):
         """Checks if the ob1(object1) and ob2(object2) are overlapping"""

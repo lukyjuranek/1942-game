@@ -19,6 +19,14 @@ class Enemy:
         self.shots = []
 
     @property
+    def width(self):
+        return 10
+
+    @property
+    def height(self):
+        return 10
+
+    @property
     def angle(self):
         return self.__angle
 
@@ -28,6 +36,17 @@ class Enemy:
             raise TypeError("The angle must be a float")
         else:
             self.__angle = value
+
+    @property
+    def health(self):
+        return self.__health
+
+    @health.setter
+    def health(self, value):
+        if type(value) != int:
+            raise TypeError("The health can be only an integer")
+        else:
+            self.__health = value
 
     @property
     def x(self):
@@ -86,4 +105,4 @@ class Enemy:
     def shoot(self):
         """Shoots from the enemy(Creates an instance of the shot class)"""
         # Creates an instance of the shot class
-        self.shots.append(Shot(self.x, self.y, 70, self.angle, "enemy"))
+        self.shots.append(Shot(self.x+self.width/2-2, self.y+self.height/2-2, 70, self.angle, "enemy"))

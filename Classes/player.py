@@ -124,9 +124,18 @@ class Player:
     def draw(self):
         """Draws the player"""
         if self.is_doing_loop:
-            # TODO: Change the sprite to the upside down one
-            pyxel.blt(self.x, self.y, 0, 16, 1, self.width, self.height, 0)
+            if pyxel.frame_count % 4 == 0:
+                pyxel.blt(self.x+5, self.y+self.height, 0, 0, 22, 6, 1, 0)
+            else:
+                pyxel.blt(self.x+5, self.y+self.height, 0, 0, 23, 6, 1, 0)
+            
+            pyxel.blt(self.x, self.y, 0, 16, 0, self.width, self.height, 0)
         else:
+            if pyxel.frame_count % 4 == 0:
+                pyxel.blt(self.x+5, self.y-1, 0, 0, 22, 6, 1, 0)
+            else:
+                pyxel.blt(self.x+5, self.y-1, 0, 0, 23, 6, 1, 0)
+
             pyxel.blt(self.x, self.y, 0, 0, 2, self.width, self.height, 0)
 
     def shoot(self):
