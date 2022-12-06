@@ -13,7 +13,6 @@ class Player:
         self.speed = 120
         self.lives = 3
         self.score = 0
-        self.high_score = 0
         self.shots = []
         self.is_doing_loop = False
         self.loop_distance = 40

@@ -19,6 +19,7 @@ class Board:
         self.enemy_shots = []
         self.bg_offset = 0
         self.game_state = "start_screen"
+        self.high_score = 0
 
     def update(self):
         """Updates the game"""
@@ -117,7 +118,7 @@ class Board:
         pyxel.text(2, 2, "SCORE", 7)
         pyxel.text(2, 10, str(self.player.score), 7)
         pyxel.text(self.width/2-15, 2, "HIGH SCORE", 7)
-        pyxel.text(self.width/2-10, 10, str(self.player.high_score), 7)
+        pyxel.text(self.width/2-10, 10, str(self.high_score), 7)
 
         pyxel.text(self.width-20, 10, str(self.player.lives)+"x", 7)
         pyxel.blt(self.width-10, 8, 0, 16, 16, 8, 8, 0)
@@ -164,8 +165,8 @@ class Board:
                 if self.check_collision(shot, enemy):
                     # Adds the score to the player
                     self.player.score += enemy.gained_score
-                    if self.player.score > self.player.high_score:
-                        self.player.high_score = self.player.score
+                    if self.player.score > self.high_score:
+                        self.high_score = self.player.score
 
                     enemy.health -= 1
 
