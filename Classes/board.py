@@ -13,7 +13,7 @@ class Board:
     def __init__(self):
         self.width = 200
         self.height = 200
-        self.player = Player(self.width/2, self.height - 40)
+        self.player = Player(self.width/2-8, self.height - 40)
         self.enemies = []
         self.enemy_shots = []
         self.high_score = 0
@@ -53,6 +53,9 @@ class Board:
         elif self.game_state == "game_over":
             self.draw_game_over_screen()
         
+        pyxel.line(self.width/2, 0, self.width/2, self.height, 7)
+        pyxel.line(0, self.height/2, self.width, self.height/2, 7)
+        
     def draw_start_screen(self):
         """Draws the start screen"""
         pyxel.cls(0)
@@ -64,7 +67,8 @@ class Board:
         """Draws the game over screen"""
         pyxel.cls(0)
         pyxel.text(self.width/2-40, 150, "Press Space to restart", self.blinking_color(7))
-        pyxel.blt(self.width/2-32, self.height/2-15, 0, 138, 18, 60, 30, 0)
+        # Game over text
+        pyxel.blt(self.width/2-29, self.height/2-15, 0, 138, 18, 60, 30, 0)
         self.draw_stats()
 
     def draw_game_screen(self):
@@ -125,8 +129,8 @@ class Board:
         pyxel.text(self.width/2-15, 2, "HIGH SCORE", 7)
         pyxel.text(self.width/2-10, 10, str(self.high_score), 7)
 
-        pyxel.text(self.width-20, 10, str(self.player.lives)+"x", 7)
-        pyxel.blt(self.width-10, 8, 0, 16, 16, 8, 8, 0)
+        pyxel.text(self.width-20, 5, str(self.player.lives)+"x", 7)
+        pyxel.blt(self.width-10, 3, 0, 16, 16, 8, 8, 0)
 
     def draw_and_update_island(self):
         """Draws the player"""
