@@ -1,6 +1,6 @@
 from Classes.shot import Shot
 import constants
-from math import pi, cos, sin, radians
+from math import cos, sin, radians
 import pyxel
 
 class Player:

@@ -1,5 +1,4 @@
 from Classes.enemy import Enemy
-import constants
 import pyxel
 
 class RegularEnemy(Enemy):

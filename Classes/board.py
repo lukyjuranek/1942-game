@@ -1,5 +1,4 @@
 from Classes.player import Player
-from Classes.enemy import Enemy
 from Classes.redEnemy import RedEnemy
 from Classes.regularEnemy import RegularEnemy
 from Classes.bombardier import Bombardier
@@ -120,7 +119,7 @@ class Board:
             self.enemies.append(SuperBombardier(randint(20, self.width-20), self.height, 270))
 
     def draw_stats(self):
-        """Draws the text elements in the game"""
+        """Draws the text elements in the game like score, highscore and lives indicator"""
         pyxel.text(2, 2, "SCORE", 7)
         pyxel.text(2, 10, str(self.player.score), 7)
         pyxel.text(self.width/2-15, 2, "HIGH SCORE", 7)

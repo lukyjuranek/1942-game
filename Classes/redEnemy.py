@@ -1,7 +1,7 @@
 from Classes.enemy import Enemy
 import constants
 import pyxel
-from math import pi, cos, sin, radians
+from math import cos, sin, radians
 from random import randint
 
 

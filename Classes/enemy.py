@@ -1,7 +1,7 @@
 from Classes.shot import Shot
 import constants
 from random import randint
-from math import sin, cos, pi, radians
+from math import sin, cos, radians
 import pyxel
 
 

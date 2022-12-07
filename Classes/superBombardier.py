@@ -2,8 +2,7 @@ from Classes.enemy import Enemy
 from Classes.shot import Shot
 import constants
 import pyxel
-from math import pi, cos, sin, atan2, degrees, radians
-from random import randint
+from math import cos, sin, atan2, degrees, radians
 
 class SuperBombardier(Enemy):
     def __init__(self, x, y, angle):
