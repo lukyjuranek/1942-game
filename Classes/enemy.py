@@ -7,15 +7,12 @@ import pyxel
 
 class Enemy:
     """Enemy class"""
+
     def __init__(self, x: float, y: float, angle: float):
         self.x = x
         self.y = y
         self.angle = angle
-        # self.speed = 60
-        # self.width = 10
-        # self.height = 9
         self.health = 1
-        self.gained_score = 100  # TODO: Change this variable name
         self.shots = []
 
     @property
@@ -53,7 +50,7 @@ class Enemy:
             raise TypeError("The health can be only an integer")
         else:
             self.__health = value
-        
+
     @property
     def speed(self):
         return 40
@@ -61,7 +58,8 @@ class Enemy:
     @speed.setter
     def speed(self, value):
         if type(value) != int and value < 0:
-            raise TypeError("The speed can be only an integer and greater than or equal to 0")
+            raise TypeError(
+                "The speed can be only an integer and greater than or equal to 0")
         else:
             self.__speed = value
 
@@ -118,4 +116,4 @@ class Enemy:
     def shoot(self):
         """Shoots from the enemy(Creates an instance of the shot class)"""
         # Creates an instance of the shot class
-        self.shots.append(Shot(self.x+self.width/2-2, self.y+self.height/2-2, 70, self.angle, "enemy"))
+        self.shots.append(Shot(self.x+self.width/2-2, self.y + self.height/2-2, 70, self.angle, "enemy"))

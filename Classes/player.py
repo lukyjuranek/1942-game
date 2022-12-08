@@ -3,14 +3,13 @@ import constants
 from math import cos, sin, radians
 import pyxel
 
+
 class Player:
     """Player class"""
+
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.width = 16
-        self.height = 14
-        self.speed = 120
         self.lives = 3
         self.score = 0
         self.shots = []
@@ -19,6 +18,18 @@ class Player:
         self.loop_distance = 40
         self.flash_red = False
         self.hit_indicator_timer = 0
+
+    @property
+    def width(self):
+        return 16
+
+    @property
+    def height(self):
+        return 14
+
+    @property
+    def speed(self):
+        return 120
 
     @property
     def x(self):
@@ -97,7 +108,6 @@ class Player:
                 # DOWN
                 self.y += self.speed * constants.DELTA_TIME
 
-
             if pyxel.btnp(pyxel.KEY_SPACE):
                 self.shoot()
 
@@ -150,7 +160,6 @@ class Player:
             elif self.hit_indicator_timer == 0:
                 self.flash_red = False
                 self.invincible = False
-
 
             # Draws the plane
             if self.flash_red:

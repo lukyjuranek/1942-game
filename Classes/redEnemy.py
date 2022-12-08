@@ -8,7 +8,6 @@ from random import randint
 class RedEnemy(Enemy):
     def __init__(self, x, y, angle):
         super().__init__(x, y, angle)
-        self.gained_score = 100
         self.health = 2
         self.shots = []
 
@@ -19,22 +18,14 @@ class RedEnemy(Enemy):
     @property
     def width(self):
         return 10
-    
+
     @property
     def height(self):
         return 10
 
     @property
-    def health(self):
-        return self.__health
-
-    @health.setter
-    def health(self, value):
-        if type(value) != int:
-            raise TypeError("The health can be only an integer")
-        else:
-            self.__health = value
-
+    def gained_score(self):
+        return 100
 
     def update(self):
         """Updates the enemy position and shoots"""
