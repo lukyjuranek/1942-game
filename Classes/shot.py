@@ -25,20 +25,19 @@ class Shot:
         self.speed = speed
         self.angle = angle
         self.shot_type = shot_type
-        # TODO: Change speed of shots depending on the type of shot
 
     @property
     def width(self):
-        """ This attribute is defined here and not in the init method in order for it to be read only. """
+        """This attribute is defined here and not in the init method in order for it to be read only."""
         return 4
     
     @property
     def height(self):
-        """ This attribute is defined here and not in the init method in order for it to be read only. """
+        """This attribute is defined here and not in the init method in order for it to be read only."""
         return 4
 
     def update(self):
-        """" Updates the shot position """
+        """"Updates the shot position"""
         self.x += self.speed * cos(radians(self.angle)) * constants.DELTA_TIME
         self.y += self.speed * sin(radians(self.angle)) * constants.DELTA_TIME
 

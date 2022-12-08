@@ -83,7 +83,7 @@ class SuperBombardier(Enemy):
                 self.shots.remove(shot)
 
     def draw(self):
-        '''Draws the enemy'''
+        """Draws the enemy"""
         if self.angle == 270:
             # Makes the enemy flash red when it's low on health
             if self.health <= 2 and pyxel.frame_count % 20 == 0:

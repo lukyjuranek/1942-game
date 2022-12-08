@@ -39,7 +39,7 @@ class RegularEnemy(Enemy):
         return 50
 
     def draw(self):
-        '''Draws the enemy'''
+        """Draws the enemy"""
 
         if self.angle == 270:
             pyxel.blt(self.x, self.y, 0, 3, 28, self.width, self.height, 0)
