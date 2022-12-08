@@ -3,6 +3,22 @@ import constants
 from math import sin, cos, radians
 
 class Shot:
+    """Class that represents a shot.
+
+    Attributes:
+        x (float): X coordinate of the shot
+        y (float): Y coordinate of the shot
+        speed (int): Speed of the shot
+        angle (float): Angle of the shot
+        shot_type (str): Type of the shot. It can be "player" or "enemy". This determines only the color of the shot
+        width (int)(readonly): Width of the shot
+        height (int)(readonly): Height of the shot
+
+    Methods:
+        update(): Updates the shot position
+        draw(): Draws the shot
+        """
+
     def __init__(self, x: float, y: float, speed: int, angle: float, shot_type: str):
         self.x = x
         self.y = y

@@ -9,12 +9,41 @@ from random import randint
 
 
 class Board:
-    """Class that stores the board, the elements and some global variables of the game like the game state"""
+    """Class that stores the board, the main game elements and some global variables of the game like the game state
+    
+    Attributes:
+        player (Player): Player instance. It stores the player object.
+        enemies (list): List of the enemies that are currently on the board.
+        high_score (int): High score of the game.
+        bg_offset (float): Background offset. It is used to make the background scroll.
+        game_state (str): Game state. It can be one of the following: "start_screen", "game", "game_over"
+        width (int)(readonly): Width of the board
+        height (int)(readonly): Height of the board
+        island_position_x (float): X coordinate of the island. Used to make the island move.
+        island_position_y (float): Y coordinate of the island. Used to make the island move.
+
+    Methods:
+        update(): Updates the board. The main game loop is in this method. It's called every frame directly from the main.py file.
+        draw(): Draws the board. Same as the update method, it's called every frame directly from the main.py file.
+
+        draw_start_screen(): Draws the start screen.
+        draw_game_over_screen(): Draws the game over screen.
+        draw_game(): Draws the game.
+
+        draw_background(): Draws the background.
+        draw_stats(): Draws the stats like the score, the lives and the high score.
+        draw_and_update_island(): Draws and updates the island.
+
+        update_game_elements(): Updates all the elements in the game and does the according actions(like removing enemies)
+        check_collision(): Checks if two objects are colliding(overlapping) or not.
+        check_all_collisions(): Checks all the collisions in the game and does the according actions(like removing enemies)
+
+        blinking_color(): Returns the color that should be used for the blinking effect and black alternately.
+    """
 
     def __init__(self):
         self.player = Player(self.width/2-8, self.height - 40)
         self.enemies = []
-        self.enemy_shots = []
         self.high_score = 0
         self.bg_offset = 0
         self.game_state = "start_screen"
@@ -92,9 +121,15 @@ class Board:
             self._island_position_y = value
 
     def update(self):
-        """Updates the game"""
+        """Updates all the elements in the game. Runs the corresponding update function depending on the game state"""
         if self.game_state == "start_screen" and pyxel.btnp(pyxel.KEY_SPACE):
             self.game_state = "game"
+
+        elif self.game_state == "game_over" and pyxel.btnp(pyxel.KEY_R):
+            self.game_state = "start_screen"
+            self.player = Player(self.width/2, self.height - 40)
+            self.enemies = []
+
         elif self.game_state == "game":
             # Updates all the elements in the game
             self.update_game_elements()
@@ -106,17 +141,15 @@ class Board:
             self.bg_offset += self.player.speed * constants.DELTA_TIME / 5
             if self.bg_offset > 16:
                 self.bg_offset = 0
-        elif self.game_state == "game_over" and pyxel.btnp(pyxel.KEY_R):
-            self.game_state = "start_screen"
-            self.player = Player(self.width/2, self.height - 40)
-            self.enemies = []
-
+                
     def draw(self):
         """Draws all the elements in the game. Runs the corresponding draw function depending on the game state"""
         if self.game_state == "start_screen":
             self.draw_start_screen()
+            
         elif self.game_state == "game":
             self.draw_game_screen()
+
         elif self.game_state == "game_over":
             self.draw_game_over_screen()
 
@@ -137,6 +170,7 @@ class Board:
 
     def draw_game_screen(self):
         """Draws the game"""
+        # Clears the screen
         pyxel.cls(6)
         # Draws the background
         self.draw_background()
@@ -153,7 +187,7 @@ class Board:
                 shot.draw()
             enemy.draw()
 
-        # Draws the shots
+        # Draws the player shots
         for shot in self.player.shots:
             shot.draw()
 
@@ -198,7 +232,7 @@ class Board:
         pyxel.blt(self.width-10, 3, 0, 16, 16, 8, 8, 0)
 
     def draw_and_update_island(self):
-        """Draws the player"""
+        """Draws the island and updates its position"""
         self.island_position_y += self.player.speed * constants.DELTA_TIME / 5
         pyxel.blt(self.island_position_x, self.island_position_y, 0, 89, 114, 30, 30, 0)
         if self.island_position_y > self.height:
@@ -254,7 +288,7 @@ class Board:
                     self.player.shots.remove(shot)
 
     def blinking_color(self, color):
-        """Makes a color blink and is controlled by the frame count"""
+        """Makes a color blink and is controlled by the frame count. Returns the color and black alternatively"""
         if pyxel.frame_count % 30 < 15:
             return color
         else:

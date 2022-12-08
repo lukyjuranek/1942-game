@@ -6,6 +6,22 @@ from math import cos, sin, atan2, degrees, radians
 
 
 class SuperBombardier(Enemy):
+    """The regular enemy class
+    
+    Attributes:
+        health (int): The health of the enemy
+        shots (list): The list of the shots of the enemy
+        speed (int)(readonly): The speed of the enemy
+        width (int)(readonly): The width of the enemy
+        height (int)(readonly): The height of the enemy
+        gained_score (int)(readonly): The score gained by killing the enemy
+
+    Methods:
+        update(): Updates the enemy
+        draw(): Draws the enemy
+        shoot(): Shoots a shot. Shoots at the screen center
+        """
+
     def __init__(self, x, y, angle):
         super().__init__(x, y, angle)
         self.health = 10
@@ -56,6 +72,7 @@ class SuperBombardier(Enemy):
         if pyxel.frame_count % 40 == 0:
             self.shoot()
 
+        # Makes the enenemy stop when it reaches the top of the screen
         if self.y < 40:
             self.speed = 0
 
@@ -85,9 +102,7 @@ class SuperBombardier(Enemy):
             raise Exception("The angle of the enemy is not supported")
 
     def shoot(self):
-        """Shoots from the enemy"""
-        # Makes the super bombardier shoot at the screen center
-
+        """Shoots from the enemy. Makes the super bombardier shoot at the screen center"""
         # Calculates the angle between the enemy and the screen center
         x_diff = pyxel.width/2 - self.x
         y_diff = pyxel.height/2 - self.y

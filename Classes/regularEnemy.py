@@ -3,6 +3,20 @@ import pyxel
 
 
 class RegularEnemy(Enemy):
+    """The regular enemy class
+    
+    Attributes:
+        health (int): The health of the enemy
+        shots (list): The list of the shots of the enemy
+        speed (int)(readonly): The speed of the enemy
+        width (int)(readonly): The width of the enemy
+        height (int)(readonly): The height of the enemy
+        gained_score (int)(readonly): The score gained by killing the enemy
+
+    Methods:
+        draw(): Draws the enemy
+        """
+
     def __init__(self, x, y, angle):
         super().__init__(x, y, angle)
         self.health = 1

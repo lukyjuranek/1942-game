@@ -5,7 +5,28 @@ import pyxel
 
 
 class Player:
-    """Player class"""
+    """Class that represents the player.
+
+    Attributes:
+        x (float): X coordinate of the player
+        y (float): Y coordinate of the player
+        lives (int): Number of lives the player has
+        score (int): Score of the player
+        shots (list): List of the shots that the player has fired. It stores the shot instances.
+        width (int)(readonly): Width of the player
+        height (int)(readonly): Height of the player
+        speed (int)(readonly): Speed of the player
+        invincible (bool): If the player is invincible or not
+        is_doing_loop (bool): If the player is doing a loop or not
+        loop_distance (int): Distance of the loop. It is used as a loop timer
+        flash_red (bool): If the player is flashing red or not
+        hit_indicator_timer (int): Timer that is used to make the player flash red when hit. When hit the timer is set to a number and it is decremented every frame
+
+    Methods:
+        update(): Updates the player position and shoots if the appropriate key is pressed.
+        register_hit(): Does the necessary actions when the player is hit.
+        shoot(): Shoots a shot
+    """
 
     def __init__(self, x, y):
         self.x = x
@@ -171,7 +192,7 @@ class Player:
         """Does the necessary actions when the player is hit."""
         self.lives -= 1
         # Starts flashing red
-        self.hit_indicator_timer = 5
+        self.hit_indicator_timer = 7
         self.invincible = True
 
     def shoot(self):
