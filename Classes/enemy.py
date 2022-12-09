@@ -53,7 +53,7 @@ class Enemy:
         else:
             # Makes the angle positive
             if value < 0:
-                self.__angle = -value
+                self.__angle = 360+value
             elif value == 360:
                 self.__angle = 0
             else:
