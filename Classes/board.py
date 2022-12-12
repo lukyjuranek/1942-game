@@ -211,15 +211,13 @@ class Board:
 
         # Randomly spawns enemies
         if randint(0, 100) == 1:
-            self.enemies.append(RegularEnemy(
-                randint(20, self.width-20), 0, 90))
+            self.enemies.append(RegularEnemy(randint(20, self.width-20), 0, 90))
         if randint(0, 100) == 1:
             self.enemies.append(RedEnemy(0, randint(0, self.height-50), 0))
         if randint(0, 200) == 1:
             self.enemies.append(Bombardier(randint(20, self.width-20), 0, 90))
-        if randint(0, 400) == 1:
-            self.enemies.append(SuperBombardier(
-                randint(20, self.width-20), self.height, 270))
+        if randint(0, 1200) == 1:
+            self.enemies.append(SuperBombardier(randint(20, self.width-20), self.height, 270))
 
     def draw_stats(self):
         """Draws the text elements in the game like score, highscore and lives indicator"""

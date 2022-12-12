@@ -72,7 +72,7 @@ class SuperBombardier(Enemy):
         if pyxel.frame_count % 40 == 0:
             self.shoot()
 
-        # Makes the enenemy stop when it reaches the top of the screen
+        # Makes the enemy stop when it reaches the top of the screen
         if self.y < 40:
             self.speed = 0
 
@@ -90,11 +90,9 @@ class SuperBombardier(Enemy):
                 self.flash = not self.flash
 
             if self.flash:
-                pyxel.blt(self.x, self.y, 0, 7, 144,
-                          self.width, self.height, 0)
+                pyxel.blt(self.x, self.y, 0, 7, 144, self.width, self.height, 0)
             else:
-                pyxel.blt(self.x, self.y, 0, 7, 120,
-                          self.width, self.height, 0)
+                pyxel.blt(self.x, self.y, 0, 7, 120, self.width, self.height, 0)
 
         elif self.angle == 90:
             pyxel.blt(self.x, self.y, 0, 1, 105, self.width, self.height, 0)
@@ -108,5 +106,4 @@ class SuperBombardier(Enemy):
         y_diff = pyxel.height/2 - self.y
         shot_angle = degrees(atan2(y_diff, x_diff))
 
-        self.shots.append(Shot(self.x+self.width/2-2, self.y +
-                          self.height/2-2, 70, shot_angle, "enemy"))
+        self.shots.append(Shot(self.x+self.width/2-2, self.y + self.height/2-2, 70, shot_angle, "enemy"))

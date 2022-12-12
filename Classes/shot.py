@@ -36,6 +36,17 @@ class Shot:
         """This attribute is defined here and not in the init method in order for it to be read only."""
         return 4
 
+    @property
+    def shot_type(self):
+        return self.__shot_type
+
+    @shot_type.setter
+    def shot_type(self, value):
+        if value != "player" and value != "enemy":
+            raise ValueError("The shot type must be either 'player' or 'enemy'")
+        else:
+            self.__shot_type = value
+
     def update(self):
         """"Updates the shot position"""
         self.x += self.speed * cos(radians(self.angle)) * constants.DELTA_TIME

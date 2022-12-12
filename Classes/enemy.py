@@ -56,6 +56,8 @@ class Enemy:
                 self.__angle = 360+value
             elif value == 360:
                 self.__angle = 0
+            elif value > 360:
+                self.__angle = value % 360
             else:
                 self.__angle = value
 
@@ -103,12 +105,13 @@ class Enemy:
     def update(self):
         """Updates the enemy position and removes the shots that go off the screen"""
         # Destroys the plane if it goes out of the screen by more than 30 pixels
-        # TODO: Make this a constant and review the value
         if self.x - self.width < -30 or self.x > pyxel.width + 30 or self.y - self.height < -30 or self.y > pyxel.height + 30:
             self.health = 0
 
         self.x += self.speed * cos(radians(self.angle)) * constants.DELTA_TIME
         self.y += self.speed * sin(radians(self.angle)) * constants.DELTA_TIME
+
+        # Shoots a shot randomly
         if randint(0, 100) == 1:
             self.shoot()
 

@@ -137,8 +137,8 @@ class Player:
                 self.invincible = True
         else:
             # Loop movement
-            self.loop_distance -= self.speed * constants.DELTA_TIME / 4
-            self.y += self.speed * constants.DELTA_TIME / 4
+            self.loop_distance -= self.speed * constants.DELTA_TIME / 2
+            self.y += self.speed * constants.DELTA_TIME / 2
             if self.loop_distance <= 0 or not bottom_edge:
                 self.is_doing_loop = False
                 self.invincible = False
