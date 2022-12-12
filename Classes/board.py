@@ -26,19 +26,19 @@ class Board:
         update(): Updates the board. The main game loop is in this method. It's called every frame directly from the main.py file.
         draw(): Draws the board. Same as the update method, it's called every frame directly from the main.py file.
 
-        draw_start_screen(): Draws the start screen.
-        draw_game_over_screen(): Draws the game over screen.
-        draw_game(): Draws the game.
+        __draw_start_screen(): Draws the start screen.
+        __draw_game_over_screen(): Draws the game over screen.
+        __draw_game(): Draws the game.
 
-        draw_background(): Draws the background.
-        draw_stats(): Draws the stats like the score, the lives and the high score.
-        draw_and_update_island(): Draws and updates the island.
+        __draw_background(): Draws the background.
+        __draw_stats(): Draws the stats like the score, the lives and the high score.
+        __draw_and_update_island(): Draws and updates the island.
 
-        update_game_elements(): Updates all the elements in the game and does the according actions(like removing enemies)
-        check_collision(): Checks if two objects are colliding(overlapping) or not.
-        check_all_collisions(): Checks all the collisions in the game and does the according actions(like removing enemies)
+        __update_game_elements(): Updates all the elements in the game and does the according actions(like removing enemies)
+        __check_collision(): Checks if two objects are colliding(overlapping) or not.
+        __check_all_collisions(): Checks all the collisions in the game and does the according actions(like removing enemies)
 
-        blinking_color(): Returns the color that should be used for the blinking effect and black alternately.
+        __blinking_color(): Returns the color that should be used for the blinking effect and black alternately.
     """
 
     def __init__(self):
@@ -60,7 +60,7 @@ class Board:
 
     @property
     def high_score(self):
-        return self._high_score
+        return self.__high_score
 
     @high_score.setter
     def high_score(self, value):
@@ -68,11 +68,11 @@ class Board:
             raise TypeError(
                 "The high score can be only an integer and greater than or equal to 0")
         else:
-            self._high_score = value
+            self.__high_score = value
 
     @property
     def game_state(self):
-        return self._game_state
+        return self.__game_state
 
     @game_state.setter
     def game_state(self, value):
@@ -82,11 +82,11 @@ class Board:
             raise ValueError(
                 "The game state must be one of the following: 'start_screen', 'game', 'game_over'")
         else:
-            self._game_state = value
+            self.__game_state = value
 
     @property
     def bg_offset(self):
-        return self._bg_offset
+        return self.__bg_offset
 
     @bg_offset.setter
     def bg_offset(self, value):
@@ -94,11 +94,11 @@ class Board:
             raise TypeError(
                 "The background offset can be only an integer or a float")
         else:
-            self._bg_offset = value
+            self.__bg_offset = value
 
     @property
     def island_position_x(self):
-        return self._island_position_x
+        return self.__island_position_x
 
     @island_position_x.setter
     def island_position_x(self, value):
@@ -106,11 +106,11 @@ class Board:
             raise TypeError(
                 "The island position y can be only an integer or a float")
         else:
-            self._island_position_x = value
+            self.__island_position_x = value
 
     @property
     def island_position_y(self):
-        return self._island_position_y
+        return self.__island_position_y
 
     @island_position_y.setter
     def island_position_y(self, value):
@@ -118,7 +118,7 @@ class Board:
             raise TypeError(
                 "The island position y can be only an integer or a float")
         else:
-            self._island_position_y = value
+            self.__island_position_y = value
 
     def update(self):
         """Updates all the elements in the game. Runs the corresponding update function depending on the game state"""
@@ -132,10 +132,10 @@ class Board:
 
         elif self.game_state == "game":
             # Updates all the elements in the game
-            self.update_game_elements()
+            self.__update_game_elements()
 
             # Checks all the collisions in the game
-            self.check_all_collisions()
+            self.__check_all_collisions()
 
             # Makes the background scroll
             self.bg_offset += self.player.speed * constants.DELTA_TIME / 5
@@ -145,39 +145,39 @@ class Board:
     def draw(self):
         """Draws all the elements in the game. Runs the corresponding draw function depending on the game state"""
         if self.game_state == "start_screen":
-            self.draw_start_screen()
+            self.__draw_start_screen()
             
         elif self.game_state == "game":
-            self.draw_game_screen()
+            self.__draw_game_screen()
 
         elif self.game_state == "game_over":
-            self.draw_game_over_screen()
+            self.__draw_game_over_screen()
 
-    def draw_start_screen(self):
+    def __draw_start_screen(self):
         """Draws the start screen"""
         pyxel.cls(0)
-        pyxel.text(self.width/2-40, 150, "Press Space to start", self.blinking_color(7))
+        pyxel.text(self.width/2-40, 150, "Press Space to start", self.__blinking_color(7))
         pyxel.blt(self.width/2-32, self.height/2-15, 0, 136, 56, 64, 32, 0)
-        self.draw_stats()
+        self.__draw_stats()
 
-    def draw_game_over_screen(self):
+    def __draw_game_over_screen(self):
         """Draws the game over screen"""
         pyxel.cls(0)
-        pyxel.text(self.width/2-36, 150, "Press R to restart", self.blinking_color(7))
+        pyxel.text(self.width/2-36, 150, "Press R to restart", self.__blinking_color(7))
         # Game over text
         pyxel.blt(self.width/2-29, self.height/2-15, 0, 138, 18, 60, 30, 0)
-        self.draw_stats()
+        self.__draw_stats()
 
-    def draw_game_screen(self):
+    def __draw_game_screen(self):
         """Draws the game"""
         # Clears the screen
         pyxel.cls(6)
         # Draws the background
-        self.draw_background()
-        self.draw_and_update_island()
+        self.__draw_background()
+        self.__draw_and_update_island()
 
         # Draws the text elements
-        self.draw_stats()
+        self.__draw_stats()
 
         # Draws the player
         self.player.draw()
@@ -191,7 +191,7 @@ class Board:
         for shot in self.player.shots:
             shot.draw()
 
-    def update_game_elements(self):
+    def __update_game_elements(self):
         """Updates all the elements in the game and does the according actions(like removing enemies)"""
         # Updates the player position
         self.player.update()
@@ -219,7 +219,7 @@ class Board:
         if randint(0, 1200) == 1:
             self.enemies.append(SuperBombardier(randint(20, self.width-20), self.height, 270))
 
-    def draw_stats(self):
+    def __draw_stats(self):
         """Draws the text elements in the game like score, highscore and lives indicator"""
         pyxel.text(2, 2, "SCORE", 7)
         pyxel.text(2, 10, str(self.player.score), 7)
@@ -229,7 +229,7 @@ class Board:
         pyxel.text(self.width-20, 5, str(self.player.lives)+"x", 7)
         pyxel.blt(self.width-10, 3, 0, 16, 16, 8, 8, 0)
 
-    def draw_and_update_island(self):
+    def __draw_and_update_island(self):
         """Draws the island and updates its position"""
         self.island_position_y += self.player.speed * constants.DELTA_TIME / 5
         pyxel.blt(self.island_position_x, self.island_position_y, 0, 89, 114, 30, 30, 0)
@@ -237,27 +237,27 @@ class Board:
             self.island_position_y = -60
             self.island_position_x = randint(0, self.width-30)
 
-    def draw_background(self):
+    def __draw_background(self):
         """Draws the background of the game"""
         for x in range(0, self.width//16+1):
             for y in range(-16, self.height//16+1):
                 pyxel.blt(x*16, y*16 + self.bg_offset, 0, 48, 0, 16, 16, 0)
 
-    def check_collision(self, ob1, ob2):
+    def __check_collision(self, ob1, ob2):
         """Checks if the ob1(object1) and ob2(object2) are overlapping"""
         if ob1.x < ob2.x + ob2.width and ob1.x + ob1.width > ob2.x and ob1.y < ob2.y + ob2.height and ob1.height + ob1.y > ob2.y:
             return True
         else:
             return False
 
-    def check_all_collisions(self):
+    def __check_all_collisions(self):
         """Checks all the collisions in the game and does the according actions"""
 
         if not self.player.invincible:
 
             # Checks if any enemy has collided with the player
             for enemy in self.enemies:
-                if self.check_collision(self.player, enemy):
+                if self.__check_collision(self.player, enemy):
                     self.enemies.remove(enemy)
                     self.player.register_hit()
                     if self.player.lives <= 0:
@@ -266,7 +266,7 @@ class Board:
             # Checks if any enemy has shot the player
             for enemy in self.enemies:
                 for shot in enemy.shots:
-                    if self.check_collision(shot, self.player):
+                    if self.__check_collision(shot, self.player):
                         enemy.shots.remove(shot)
                         self.player.register_hit()
                         if self.player.lives <= 0:
@@ -275,7 +275,7 @@ class Board:
         # Checks if the player has shot an enemy
         for enemy in self.enemies:
             for shot in self.player.shots:
-                if self.check_collision(shot, enemy):
+                if self.__check_collision(shot, enemy):
                     # Adds the score to the player
                     self.player.score += enemy.gained_score
                     if self.player.score > self.high_score:
@@ -285,7 +285,7 @@ class Board:
 
                     self.player.shots.remove(shot)
 
-    def blinking_color(self, color):
+    def __blinking_color(self, color):
         """Makes a color blink and is controlled by the frame count. Returns the color and black alternatively"""
         if pyxel.frame_count % 30 < 15:
             return color
